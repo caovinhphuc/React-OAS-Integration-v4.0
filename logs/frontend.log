@@ -1,75 +1,52 @@
- INFO  Accepting connections at http://localhost:8080
- HTTP  9/28/2025 2:03:05 PM ::1 GET /
- HTTP  9/28/2025 2:03:05 PM ::1 Returned 200 in 32 ms
- HTTP  9/28/2025 2:36:10 PM ::1 GET /
- HTTP  9/28/2025 2:36:10 PM ::1 Returned 200 in 37 ms
- HTTP  9/28/2025 2:36:10 PM ::1 GET /static/js/main.4e874a0b.js
- HTTP  9/28/2025 2:36:10 PM ::1 GET /static/css/main.f4afd472.css
- HTTP  9/28/2025 2:36:10 PM ::1 Returned 200 in 16 ms
- HTTP  9/28/2025 2:36:10 PM ::1 Returned 200 in 14 ms
- HTTP  9/28/2025 2:36:10 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:36:10 PM ::1 GET /manifest.json
- HTTP  9/28/2025 2:36:10 PM ::1 Returned 200 in 2 ms
- HTTP  9/28/2025 2:36:10 PM ::1 Returned 200 in 1 ms
- HTTP  9/28/2025 2:36:35 PM ::1 GET /dashboard
- HTTP  9/28/2025 2:36:35 PM ::1 Returned 404 in 8 ms
- HTTP  9/28/2025 2:36:35 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:36:35 PM ::1 Returned 304 in 2 ms
- HTTP  9/28/2025 2:37:13 PM ::1 GET /google-sheets
- HTTP  9/28/2025 2:37:13 PM ::1 Returned 404 in 10 ms
- HTTP  9/28/2025 2:37:13 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:37:13 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:39:27 PM ::1 GET /google-sheets
- HTTP  9/28/2025 2:39:27 PM ::1 Returned 404 in 3 ms
- HTTP  9/28/2025 2:39:27 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:39:27 PM ::1 Returned 200 in 1 ms
- HTTP  9/28/2025 2:39:31 PM ::1 GET /
- HTTP  9/28/2025 2:39:31 PM ::1 Returned 200 in 1 ms
- HTTP  9/28/2025 2:39:31 PM ::1 GET /static/js/main.4e874a0b.js
- HTTP  9/28/2025 2:39:31 PM ::1 GET /static/css/main.f4afd472.css
- HTTP  9/28/2025 2:39:31 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:39:31 PM ::1 Returned 304 in 3 ms
- HTTP  9/28/2025 2:39:31 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:39:31 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:39:31 PM ::1 GET /manifest.json
- HTTP  9/28/2025 2:39:31 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:39:35 PM ::1 GET /static/js/20.17f6b216.chunk.js
- HTTP  9/28/2025 2:39:35 PM ::1 GET /static/css/653.548a7e40.chunk.css
- HTTP  9/28/2025 2:39:35 PM ::1 GET /static/js/163.0cdd8939.chunk.js
- HTTP  9/28/2025 2:39:35 PM ::1 GET /static/js/653.6f76e2ad.chunk.js
- HTTP  9/28/2025 2:39:35 PM ::1 Returned 200 in 3 ms
- HTTP  9/28/2025 2:39:35 PM ::1 Returned 200 in 5 ms
- HTTP  9/28/2025 2:39:35 PM ::1 Returned 200 in 8 ms
- HTTP  9/28/2025 2:39:35 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:39:35 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:39:35 PM ::1 Returned 200 in 14 ms
- HTTP  9/28/2025 2:39:36 PM ::1 GET /static/css/670.2e71ef69.chunk.css
- HTTP  9/28/2025 2:39:36 PM ::1 Returned 200 in 3 ms
- HTTP  9/28/2025 2:39:36 PM ::1 GET /static/js/670.053a0fdb.chunk.js
- HTTP  9/28/2025 2:39:36 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:39:36 PM ::1 Returned 304 in 0 ms
- HTTP  9/28/2025 2:39:36 PM ::1 Returned 200 in 3 ms
- HTTP  9/28/2025 2:39:37 PM ::1 GET /static/css/819.9d5b65cd.chunk.css
- HTTP  9/28/2025 2:39:37 PM ::1 GET /static/js/819.1f6b934e.chunk.js
- HTTP  9/28/2025 2:39:37 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:39:37 PM ::1 Returned 304 in 0 ms
- HTTP  9/28/2025 2:39:37 PM ::1 Returned 200 in 2 ms
- HTTP  9/28/2025 2:39:37 PM ::1 Returned 200 in 2 ms
- HTTP  9/28/2025 2:41:16 PM ::1 GET /dashboard
- HTTP  9/28/2025 2:41:16 PM ::1 Returned 404 in 4 ms
- HTTP  9/28/2025 2:41:16 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:41:16 PM ::1 Returned 200 in 5 ms
- HTTP  9/28/2025 2:45:18 PM ::1 GET /
- HTTP  9/28/2025 2:45:18 PM ::1 Returned 304 in 31 ms
- HTTP  9/28/2025 2:45:18 PM ::1 GET /static/js/main.4e874a0b.js
- HTTP  9/28/2025 2:45:18 PM ::1 GET /static/css/main.f4afd472.css
- HTTP  9/28/2025 2:45:18 PM ::1 Returned 304 in 8 ms
- HTTP  9/28/2025 2:45:18 PM ::1 Returned 304 in 10 ms
- HTTP  9/28/2025 2:45:18 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:45:18 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:45:18 PM ::1 GET /manifest.json
- HTTP  9/28/2025 2:45:18 PM ::1 Returned 304 in 1 ms
- HTTP  9/28/2025 2:52:02 PM ::1 GET /dashboard
- HTTP  9/28/2025 2:52:02 PM ::1 Returned 404 in 26 ms
- HTTP  9/28/2025 2:52:02 PM ::1 GET /favicon.ico
- HTTP  9/28/2025 2:52:02 PM ::1 Returned 304 in 3 ms
+
+> react-oas-integration@3.0.0 dev
+> concurrently "npm run start" "npm run backend" "npm run ai-service"
+
+[2] 
+[2] > react-oas-integration@3.0.0 ai-service
+[2] > cd ai-service && python -m uvicorn main_simple:app --host 0.0.0.0 --port 8000 --reload
+[2] 
+[0] 
+[0] > react-oas-integration@3.0.0 start
+[0] > react-scripts start
+[0] 
+[1] 
+[1] > react-oas-integration@3.0.0 backend
+[1] > cd backend && npm start
+[1] 
+[1] 
+[1] > react-oas-backend@1.0.0 start
+[1] > node server.js
+[1] 
+[2] INFO:     Will watch for changes in these directories: ['/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/ai-service']
+[2] ERROR:    [Errno 48] Address already in use
+[1] node:events:486
+[1]       throw er; // Unhandled 'error' event
+[1]       ^
+[1] 
+[1] Error: listen EADDRINUSE: address already in use :::3001
+[1]     at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+[1]     at listenInCluster (node:net:1997:12)
+[1]     at Server.listen (node:net:2102:7)
+[1]     at Object.<anonymous> (/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/backend/server.js:100:8)
+[1]     at Module._compile (node:internal/modules/cjs/loader:1760:14)
+[1]     at Object..js (node:internal/modules/cjs/loader:1892:10)
+[1]     at Module.load (node:internal/modules/cjs/loader:1480:32)
+[1]     at Module._load (node:internal/modules/cjs/loader:1299:12)
+[1]     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+[1]     at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+[1] Emitted 'error' event on Server instance at:
+[1]     at emitErrorNT (node:net:1976:8)
+[1]     at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+[1]   code: 'EADDRINUSE',
+[1]   errno: -48,
+[1]   syscall: 'listen',
+[1]   address: '::',
+[1]   port: 3001
+[1] }
+[1] 
+[1] Node.js v25.2.1
+[1] npm run backend exited with code 1
+[2] npm run ai-service exited with code 1
+[0] Something is already running on port 3000.
+[0] npm run start exited with code 0

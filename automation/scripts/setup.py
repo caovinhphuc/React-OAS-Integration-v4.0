@@ -25,7 +25,8 @@ class SystemSetup:
     def setup_driver(self, headless=True):
         """Setup Chrome WebDriver với tối ưu performance"""
         try:
-            self.logger.info("🌐 Setting up WebDriver...")
+            if self.logger:
+                self.logger.info("🌐 Setting up WebDriver...")
 
             chrome_options = Options()
 
@@ -97,7 +98,8 @@ class SystemSetup:
                 service = Service(ChromeDriverManager().install())
                 self.driver = webdriver.Chrome(service=service, options=chrome_options)
             except Exception as e:
-                self.logger.warning(f"ChromeDriverManager failed: {e}")
+                if self.logger:
+                    self.logger.warning(f"ChromeDriverManager failed: {e}")
                 service = Service()
                 self.driver = webdriver.Chrome(service=service, options=chrome_options)
 
@@ -111,11 +113,13 @@ class SystemSetup:
                 "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
             )
 
-            self.logger.info("✅ WebDriver tối ưu đã sẵn sàng")
+            if self.logger:
+                self.logger.info("✅ WebDriver tối ưu đã sẵn sàng")
             return self.driver
 
         except Exception as e:
-            self.logger.error(f"❌ Lỗi khởi tạo WebDriver: {e}")
+            if self.logger:
+                self.logger.error(f"❌ Lỗi khởi tạo WebDriver: {e}")
             return None
 
     def setup_sheets_config(self):

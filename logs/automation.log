@@ -1,1 +1,1 @@
-./start_dev_servers.sh: line 176: python: command not found
+/opt/homebrew/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/automation/src/main.py': [Errno 2] No such file or directory

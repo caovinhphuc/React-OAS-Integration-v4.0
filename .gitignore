@@ -1,5 +1,161 @@
-node_modules
-shared
+# =============================================================================
+# React OAS Integration v3.0 - Git Ignore Rules
+# =============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment variables & secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.backup
+.env.old
+*.env
+
+# Google Credentials & Service Accounts (CRITICAL - Never commit!)
+**/config/google-credentials.json
+**/config/service_account.json
+**/service-account-key.json
+**/*service-account*.json
 automation/config/google-credentials.json
+automation/automation_new/config/service_account.json
+one_automation_system/config/service_account.json
+mia-logistics-manager/src/config/service-account-key.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+automation/logs/
+*.log.*
+
+# Build outputs
+build/
+dist/
+out/
+.next/
+.vercel/
+coverage/
+.nyc_output/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+.mypy_cache/
+.hypothesis/
+
+# Session & Cache files
+*.pkl
+*.pickle
+session_data.pkl
+automation/session_data.pkl
+*.session
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
 *.dmg
+*.zip
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python virtual environments
+venv/
+env/
+.venv/
+automation/venv/
+automation/venv.backup.*/
+ai-service/venv/
+ai-service/venv.backup.*/
+ai-venv/
+.venv/
+
+# Backup directories
+venv.backup.*/
+backup/
+*.backup
+
+# Shared directories (if containing generated files)
+shared/__pycache__/
+
+# Data files (large or sensitive)
+*.csv
+*.xlsx
+*.xls
+data/
+automation/data/
+exports/
+
+# Large binary files
+*.pdf
+*.docx
+*.zip
+*.tar.gz
+
+# Vercel
 .vercel
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# TypeScript
+*.tsbuildinfo

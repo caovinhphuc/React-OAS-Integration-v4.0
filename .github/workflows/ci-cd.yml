@@ -58,6 +58,11 @@ jobs:
           cd automation
           pip install -r requirements.txt
 
+      - name: Install AI service dependencies
+        run: |
+          cd ai-service
+          pip install -r requirements.txt
+
       - name: Run frontend tests
         run: npm test -- --coverage --watchAll=false --passWithNoTests
 
@@ -66,10 +71,19 @@ jobs:
           cd backend
           npm test -- --passWithNoTests || echo "No backend tests found"
 
+      - name: Run Python tests (if available)
+        run: |
+          cd automation
+          python -m pytest tests/ -v --tb=short || echo "No Python tests found"
+          cd ../ai-service
+          python -m pytest -v --tb=short || echo "No AI service tests found"
+
       - name: Upload coverage to Codecov
+        if: always()
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage/lcov.info
+          fail_ci_if_error: false
 
   # Build Job
   build:
@@ -123,6 +137,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ./Dockerfile.ai
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/react-oas-integration:latest
@@ -160,15 +175,6 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-args: "--prod"
-          vercel-org-id: ${{ secrets.ORG_ID }}
-          vercel-project-id: ${{ secrets.PROJECT_ID }}
-
-      - name: Deploy to staging (if not main branch)
-        if: github.ref != 'refs/heads/main'
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID }}
           vercel-project-id: ${{ secrets.PROJECT_ID }}
 

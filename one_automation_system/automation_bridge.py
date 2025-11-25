@@ -47,6 +47,12 @@ async def root():
 async def health():
     return {"status": "healthy", "automation_available": automation_available}
 
+@app.get("/favicon.ico")
+async def favicon():
+    """Handle favicon requests to avoid 404 errors"""
+    from fastapi.responses import Response
+    return Response(status_code=204)  # No Content
+
 @app.post("/api/automation/start")
 async def start_automation():
     """Start automation process"""

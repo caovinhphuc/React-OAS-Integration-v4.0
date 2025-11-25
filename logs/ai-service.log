@@ -1,7 +1,1 @@
-INFO:     Started server process [35866]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:49887 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55807 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55809 - "GET /api/models HTTP/1.1" 200 OK
+ERROR:    Error loading ASGI app. Could not import module "ai_service.main".

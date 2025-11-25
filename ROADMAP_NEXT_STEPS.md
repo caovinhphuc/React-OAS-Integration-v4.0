@@ -1,42 +1,105 @@
 # 🚀 ROADMAP - CÁC BƯỚC TIẾP THEO
 
-## 🔄 CẬP NHẬT TRẠNG THÁI HIỆN TẠI (2025-09-26)
+## 🔄 CẬP NHẬT TRẠNG THÁI HIỆN TẠI (2025-01-27)
 
 ### ✅ ĐÃ HOÀN THÀNH (Foundation)
 
-- Hợp nhất dịch vụ Google Sheets (loại bỏ 3 file trùng) → `shared-services/google-sheets/`
-- Chuẩn hoá re-export để không phá vỡ import cũ
-- Phân tích kiến trúc, xác định gaps (OnePage Service, Scheduler, Env validation)
-- Báo cáo tổng hợp `PROJECT_ANALYSIS_SUMMARY.md`
+- ✅ Hợp nhất dịch vụ Google Sheets (loại bỏ 3 file trùng) → `shared-services/google-sheets/`
+- ✅ Chuẩn hoá re-export để không phá vỡ import cũ
+- ✅ Phân tích kiến trúc, xác định gaps → `ARCHITECTURE_GUIDE.md`
+- ✅ Báo cáo tổng hợp `PROJECT_ANALYSIS_SUMMARY.md`
+- ✅ Automation System đã có (`automation/automation.py`)
+- ✅ AI Service đã có (`ai-service/ai_service.py`)
+- ✅ Google Sheets Service đã có (`services/google_sheets_service.py`)
+- ✅ Main API đã có (`automation/main.py`, `one_automation_system/main.py`)
 
 ### 🚧 ĐANG THIẾT KẾ / CHƯA CÓ
 
 | Hạng mục                 | Mô tả thiếu                                     | Ưu tiên    |
 | ------------------------ | ----------------------------------------------- | ---------- |
+| **Analytics Module**     | ❌ Chưa có - Cần tạo statistics & reports engine| **RẤT CAO** |
+| **Recommendations Engine**| ❌ Chưa có - Đề xuất giải pháp từ AI analysis   | **RẤT CAO** |
+| **Data Pipeline**        | Chưa có luồng Automation → Sheets → AI → Analytics | **CAO** |
 | OnePage Service          | Chưa có service + route để lấy dữ liệu nguồn    | Cao        |
 | Scheduler (cron)         | Chưa có job tự động hóa data pipeline           | Cao        |
 | Env Validation           | Chưa kiểm tra biến môi trường startup           | Cao        |
-| Data Processing Pipeline | Chưa có module thống nhất transform Sheets → AI | Trung bình |
 | Test Coverage Backend    | Chưa có Jest + Supertest                        | Cao        |
 | AI Model Lifecycle       | Chưa có lưu version model / registry            | Trung bình |
 | Metrics & Monitoring     | Chưa có Prometheus / health metrics             | Trung bình |
 | Caching Layer            | Chưa có (Redis) cho Sheets/API heavy calls      | Trung bình |
 | React Query Integration  | Chưa dùng cache client-side                     | Thấp       |
 
-### 🎯 ƯU TIÊN NGẮN HẠN (Sprint 1 – 5 ngày)
+### 🎯 ƯU TIÊN NGẮN HẠN (Sprint 1 – 5 ngày) - THEO KIẾN TRÚC MỚI
 
-1. Scaffold `onePageService` + endpoint `/api/onepage/test`
-2. Thêm `schedulerService` (node-cron) chạy job demo ghi log + trigger fetch
-3. Thêm env schema (`config/env.js`) dùng `envalid`
-4. Thiết lập Jest + Supertest (tests: health, sheets info, onepage test)
-5. Refactor frontend chính: cài `@tanstack/react-query` + tạo `apiClient`
-6. Bổ sung tài liệu: `ARCHITECTURE.md` + cập nhật roadmap
+**🔥 Priority 1: Hoàn thiện Data Pipeline**
+
+1. ✅ Đã có: Automation System → Google Sheets
+2. ⚠️ Cần làm: Kết nối AI Service đọc từ Google Sheets
+3. ❌ **Tạo Analytics Module** (`analytics/`) - Statistics & Reports
+4. ❌ **Tạo Recommendations Engine** (`analytics/recommendations.py`)
+
+**🔥 Priority 2: Integration & Testing**
+
+5. Tạo API Gateway để điều phối toàn bộ luồng
+6. Thiết lập Jest + Supertest (tests: health, sheets, AI, analytics)
+7. Kết nối Automation → Sheets → AI → Analytics → Recommendations
+
+**🔥 Priority 3: Enhancement**
+
+8. Scaffold `onePageService` + endpoint `/api/onepage/test`
+9. Thêm `schedulerService` (node-cron) trigger automation
+10. Thêm env schema (`config/env.js`) dùng `envalid`
+11. Refactor frontend: cài `@tanstack/react-query` + tạo `apiClient`
 
 ### 📌 DEBT / RỦI RO THEO DÕI
 
 - Trùng lặp config env giữa các sub-project → cần hợp nhất format `.env`
 - Chưa có chuẩn log JSON → khó ingest sau này
 - Chưa tách rõ boundary Backend chính vs Automation Python
+- **Thiếu Analytics Module và Recommendations Engine** → Cần tạo ngay
+
+---
+
+## 🏗️ **PHASE 0: HOÀN THIỆN CORE ARCHITECTURE (1 tuần) - ƯU TIÊN CAO**
+
+> **Mục tiêu**: Hoàn thiện kiến trúc cốt lõi theo `ARCHITECTURE_GUIDE.md`
+>
+> **Luồng dữ liệu**: Automation → Google Sheets → AI Service → Analytics → Recommendations
+
+### **0.1 Tạo Analytics Module** ❌ CHƯA CÓ
+
+- [ ] **Tạo thư mục `analytics/`** với cấu trúc:
+
+  ```
+  analytics/
+  ├── __init__.py
+  ├── statistics.py       # Tính toán metrics, KPIs
+  ├── reports.py          # Tạo báo cáo tự động
+  ├── recommendations.py  # Đề xuất giải pháp
+  └── visualization.py    # Charts và graphs
+  ```
+
+- [ ] **Statistics Engine**: Tính toán metrics từ Google Sheets data
+- [ ] **Reports Generator**: Báo cáo hàng ngày/tuần/tháng, Export PDF/Excel
+- [ ] **Visualization**: Charts và graphs cho dashboard
+
+### **0.2 Tạo Recommendations Engine** ❌ CHƯA CÓ
+
+- [ ] **Phân tích kết quả từ AI Service**
+- [ ] **Generate Recommendations**: Đề xuất hành động với priority
+- [ ] **Cost-benefit analysis** cho mỗi recommendation
+
+### **0.3 Kết nối Data Pipeline**
+
+- [ ] ✅ Automation → Google Sheets (Đã có)
+- [ ] ⚠️ Google Sheets → AI Service (Cần kết nối)
+- [ ] ❌ AI Service → Analytics (Chưa có)
+- [ ] ❌ Analytics → Recommendations (Chưa có)
+
+### **0.4 API Gateway**
+
+- [ ] **Tạo main API Gateway** điều phối toàn bộ luồng
+- [ ] Endpoints: `/api/automation/sync`, `/api/analytics/*`, `/api/recommendations`
 
 ---
 
@@ -165,25 +228,39 @@
 
 ---
 
-## 🎯 **IMMEDIATE NEXT STEPS (Tuần này)**
+## 🎯 **IMMEDIATE NEXT STEPS (Tuần này) - THEO KIẾN TRÚC MỚI**
 
-### **Priority 1: Integration**
+### **🔥 Priority 1: Analytics & Recommendations (QUAN TRỌNG NHẤT)**
+
+1. ✅ **Đã có**: `ARCHITECTURE_GUIDE.md` - Kiến trúc rõ ràng
+2. ❌ **Cần làm**: Tạo `analytics/` module với statistics.py và reports.py
+3. ❌ **Cần làm**: Tạo `analytics/recommendations.py` - Recommendations Engine
+4. ⚠️ **Cần kết nối**: AI Service đọc từ Google Sheets
+
+### **🔥 Priority 2: Data Pipeline Integration**
+
+1. Kết nối Automation → Google Sheets ✅ (Đã có)
+2. Kết nối Google Sheets → AI Service ⚠️ (Cần làm)
+3. Kết nối AI Service → Analytics ❌ (Cần tạo Analytics trước)
+4. Kết nối Analytics → Recommendations ❌ (Cần tạo Recommendations trước)
+
+### **🔥 Priority 3: API Gateway**
+
+1. Tạo main API Gateway điều phối toàn bộ luồng
+2. Endpoints cho automation, analytics, AI, recommendations
+3. Testing toàn bộ pipeline end-to-end
+
+### **Priority 4: Enhancement**
 
 1. Scaffold `onePageService` (fetch mock → log) + route test
-2. Thêm `schedulerService` chạy mỗi 5 phút (placeholder)
-3. Kết nối Google Sheets service mới vào các nơi còn dùng bản cũ (verify imports)
-4. Chuẩn bị test tự động đầu tiên (health + sheets + onepage)
+2. Thêm `schedulerService` chạy mỗi 5 phút trigger automation
+3. Thêm React Query để giảm gọi lặp
+4. Thiết lập caching strategy (Redis – TODO)
 
-### **Priority 2: Enhancement**
+### **Priority 5: Documentation**
 
-1. Thêm React Query để giảm gọi lặp
-2. Chuẩn hoá axios instance + retry + interceptor
-3. Thiết lập caching strategy (định nghĩa layer Redis – TODO)
-
-### **Priority 3: Documentation**
-
-1. Cập nhật ROADMAP (đã làm)
-2. Thêm `ARCHITECTURE.md` (sequence OnePage → Sheets → AI)
+1. ✅ Cập nhật ROADMAP (đã làm)
+2. ✅ Thêm `ARCHITECTURE_GUIDE.md` (đã có)
 3. Bổ sung phần ENV_GUIDE mô tả biến bắt buộc
 
 ---

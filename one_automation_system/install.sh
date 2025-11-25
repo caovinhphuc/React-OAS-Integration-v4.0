@@ -38,14 +38,18 @@ command_exists() {
 
 # Function to check version
 check_version() {
-    local cmd=$1
-    local min_version=$2
-    local current_version=$3
-    
-    if [[ $(echo -e "$min_version\n$current_version" | sort -V | head -n1) != "$min_version" ]]; then
+    local min_version=$1
+    local current_version=$2
+
+    # Compare versions: if current >= min, return 0 (success)
+    # Sort versions and check if current is greater or equal
+    if [[ "$(printf '%s\n' "$min_version" "$current_version" | sort -V | head -n1)" == "$min_version" ]]; then
+        # min_version <= current_version, which means current is OK
+        return 0
+    else
+        # min_version > current_version, which means current is too old
         return 1
     fi
-    return 0
 }
 
 print_status "🚀 Starting MIA Warehouse Management Installation..."

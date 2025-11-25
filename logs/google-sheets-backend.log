@@ -1,4 +1,4 @@
-[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
 🚀 Server running on port 3003
 📊 Google Sheets: Not configured
 📧 Email: Not configured

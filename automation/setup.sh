@@ -27,22 +27,34 @@ cd "$(dirname "$0")"
 # Step 1: System Requirements Check
 echo -e "${BLUE}🔍 Checking system requirements...${NC}"
 
-# Check Python
-if command -v python3 &> /dev/null; then
+# Check Python - Prefer Python 3.11 for compatibility with pydantic-core
+PYTHON_CMD=""
+if command -v python3.11 &> /dev/null; then
+    PYTHON_CMD="python3.11"
+    PYTHON_VERSION=$(python3.11 --version 2>&1 | cut -d' ' -f2)
+    echo -e "${GREEN}✅ Python3.11: $PYTHON_VERSION (Recommended)${NC}"
+elif command -v python3.12 &> /dev/null; then
+    PYTHON_CMD="python3.12"
+    PYTHON_VERSION=$(python3.12 --version 2>&1 | cut -d' ' -f2)
+    echo -e "${YELLOW}⚠️ Python3.12: $PYTHON_VERSION (Python 3.11 recommended for pydantic-core)${NC}"
+elif command -v python3.13 &> /dev/null; then
+    PYTHON_CMD="python3.13"
+    PYTHON_VERSION=$(python3.13 --version 2>&1 | cut -d' ' -f2)
+    echo -e "${YELLOW}⚠️ Python3.13: $PYTHON_VERSION (Python 3.11 recommended for pydantic-core)${NC}"
+elif command -v python3 &> /dev/null; then
+    PYTHON_CMD="python3"
     PYTHON_VERSION=$(python3 --version 2>&1 | cut -d' ' -f2)
-    echo -e "${GREEN}✅ Python3: $PYTHON_VERSION${NC}"
-
-    # Check if Python version is 3.8+
     PYTHON_MAJOR=$(echo $PYTHON_VERSION | cut -d. -f1)
     PYTHON_MINOR=$(echo $PYTHON_VERSION | cut -d. -f2)
     if [ "$PYTHON_MAJOR" -ge 3 ] && [ "$PYTHON_MINOR" -ge 8 ]; then
-        echo -e "${GREEN}   Compatible version (≥3.8)${NC}"
+        echo -e "${YELLOW}⚠️ Python3: $PYTHON_VERSION (Python 3.11 recommended for pydantic-core)${NC}"
     else
-        echo -e "${YELLOW}   ⚠️ Python 3.8+ recommended${NC}"
+        echo -e "${RED}❌ Python3: $PYTHON_VERSION (Python 3.8+ required)${NC}"
+        exit 1
     fi
 else
     echo -e "${RED}❌ Python3 not found!${NC}"
-    echo -e "${YELLOW}💡 Please install Python3 3.8+ before continuing${NC}"
+    echo -e "${YELLOW}💡 Please install Python3.11: brew install python@3.11${NC}"
     exit 1
 fi
 
@@ -56,10 +68,22 @@ fi
 # Step 2: Virtual Environment Setup
 echo -e "${BLUE}📦 Setting up virtual environment...${NC}"
 if [ ! -d "venv" ]; then
-    python3 -m venv venv
-    echo -e "${GREEN}✅ Virtual environment created${NC}"
+    $PYTHON_CMD -m venv venv
+    echo -e "${GREEN}✅ Virtual environment created with $PYTHON_CMD${NC}"
 else
-    echo -e "${YELLOW}⚠️ Virtual environment exists - using existing${NC}"
+    echo -e "${YELLOW}⚠️ Virtual environment exists${NC}"
+    # Check if existing venv uses correct Python version
+    EXISTING_PYTHON=$(venv/bin/python --version 2>&1 | cut -d' ' -f2)
+    EXPECTED_PYTHON=$PYTHON_VERSION
+    if [ "$EXISTING_PYTHON" != "$EXPECTED_PYTHON" ]; then
+        echo -e "${YELLOW}⚠️ Existing venv uses Python $EXISTING_PYTHON, but $PYTHON_CMD is $EXPECTED_PYTHON${NC}"
+        echo -e "${BLUE}🔄 Backing up old venv and creating new one...${NC}"
+        mv venv "venv.backup.$(date +%Y%m%d_%H%M%S)"
+        $PYTHON_CMD -m venv venv
+        echo -e "${GREEN}✅ New virtual environment created with $PYTHON_CMD${NC}"
+    else
+        echo -e "${GREEN}✅ Using existing venv (Python $EXISTING_PYTHON)${NC}"
+    fi
 fi
 
 # Step 3: Activate Virtual Environment
@@ -205,7 +229,7 @@ echo -e "${GREEN}✅ Execute permissions set for shell scripts${NC}"
 
 # Step 10: System Test
 echo -e "${BLUE}⚡ Running system health check...${NC}"
-if python setup.py > /dev/null 2>&1; then
+if venv/bin/python setup.py > /dev/null 2>&1; then
     echo -e "${GREEN}✅ System setup test passed${NC}"
 else
     echo -e "${YELLOW}⚠️ System test warnings (run 'python setup.py' for details)${NC}"
