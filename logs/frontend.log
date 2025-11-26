@@ -63,3 +63,4 @@
 [0] To create a production build, use npm run build.
 [0] 
 [0] webpack compiled successfully
+[0] npm run start exited with code SIGINT
