@@ -246,6 +246,11 @@ install_vercel_cli() {
 
         log_info "✅ Vercel CLI found at: $VERCEL_CMD"
         VERCEL_CLI_AVAILABLE=true
+    else
+        # Get vercel command path if already available
+        if [[ -z "${VERCEL_CMD:-}" ]]; then
+            VERCEL_CMD=$(get_vercel_path)
+        fi
     fi
 }
 
@@ -466,6 +471,22 @@ deploy_to_vercel() {
         fi
     fi
 
+    # Create .vercel directory if needed to avoid project name issues
+    if [[ ! -d ".vercel" ]]; then
+        log_info "Initializing Vercel project..."
+        # Let Vercel create the project interactively on first deploy
+    fi
+
+    # Check if .vercel folder exists with invalid project name
+    if [[ -d ".vercel" && -f ".vercel/project.json" ]]; then
+        log_info "Existing Vercel project configuration found"
+        # Check project name in .vercel/project.json
+        if grep -q '"name":' .vercel/project.json 2>/dev/null; then
+            local current_name=$(grep '"name":' .vercel/project.json | cut -d'"' -f4)
+            log_info "Current project name: $current_name"
+        fi
+    fi
+
     local deploy_command="$VERCEL_CMD"
 
     if [[ "$PRODUCTION_MODE" == "true" ]]; then
@@ -497,8 +518,18 @@ deploy_to_vercel() {
 
     # Execute deployment
     log_info "Executing: $deploy_command"
+    log_warn "💡 If prompted for project name, use: $VERCEL_PROJECT_NAME"
+
     $deploy_command || {
         log_error "Deployment failed!"
+        log_error ""
+        log_error "Possible solutions:"
+        log_error "1. If project name error: Delete .vercel folder and try again"
+        log_error "2. Run manually to set project name: $VERCEL_CMD"
+        log_error "3. Suggested project name: $VERCEL_PROJECT_NAME"
+        log_error ""
+        log_error "To reset project config:"
+        log_error "  rm -rf .vercel && ./deploy-vercel.sh"
         exit 1
     }
 
