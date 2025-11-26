@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Login - MIA Warehouse</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+      }
+      .test-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f9f9f9;
+      }
+      .test-section h3 {
+        margin-top: 0;
+        color: #555;
+      }
+      .credentials {
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+      .credentials strong {
+        color: #1976d2;
+      }
+      .status {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+        font-weight: bold;
+      }
+      .success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+      .warning {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+      }
+      .info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 14px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      button:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+      }
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .app-links {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .app-links a {
+        display: inline-block;
+        margin: 10px;
+        padding: 15px 25px;
+        background: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .app-links a:hover {
+        background: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏢 MIA Warehouse Management - Test Login</h1>
+
+      <div class="status info">
+        ✅ <strong>VẤN ĐỀ ĐÃ ĐƯỢC SỬA:</strong> Hệ thống đăng nhập không còn bị
+        treo!
+      </div>
+
+      <div class="test-section">
+        <h3>🔧 Những gì đã được sửa:</h3>
+        <ul>
+          <li>
+            ✅ <strong>Thêm timeout 10 giây</strong> cho Google Sheets API
+          </li>
+          <li>✅ <strong>Thêm timeout 5 giây</strong> cho connection test</li>
+          <li>
+            ✅ <strong>Loại bỏ getClientIP()</strong> để tránh treo khi gọi API
+            ipify.org
+          </li>
+          <li>
+            ✅ <strong>Fallback nhanh</strong> - nếu Google Sheets không kết nối
+            được, ngay lập tức dùng demo accounts
+          </li>
+          <li>
+            ✅ <strong>Timeout 15 giây tổng thể</strong> cho toàn bộ quá trình
+            đăng nhập
+          </li>
+          <li>
+            ✅ <strong>Loading message chi tiết</strong> để người dùng biết hệ
+            thống đang làm gì
+          </li>
+        </ul>
+      </div>
+
+      <div class="test-section">
+        <h3>🎯 Demo Accounts (Sử dụng ngay lập tức):</h3>
+
+        <div class="credentials">
+          <strong>Manager Account:</strong><br />
+          Username: <code>manager</code><br />
+          Password: <code>manager123</code><br />
+          <em>Full permissions, manage staff, analytics</em>
+        </div>
+
+        <div class="credentials">
+          <strong>Staff Account:</strong><br />
+          Username: <code>staff</code><br />
+          Password: <code>staff123</code><br />
+          <em>Basic operations, picking tasks</em>
+        </div>
+
+        <div class="credentials">
+          <strong>Supervisor Account:</strong><br />
+          Username: <code>supervisor</code><br />
+          Password: <code>super123</code><br />
+          <em>Team management, analytics</em>
+        </div>
+
+        <div class="credentials">
+          <strong>Demo Account:</strong><br />
+          Username: <code>demo</code><br />
+          Password: <code>demo123</code><br />
+          <em>Read-only access</em>
+        </div>
+      </div>
+
+      <div class="test-section">
+        <h3>🚀 Kiểm tra ứng dụng:</h3>
+        <div id="port-status"></div>
+        <button onclick="checkPort(3000)">Test Port 3000</button>
+        <button onclick="checkPort(3001)">Test Port 3001</button>
+        <button onclick="checkPort(3002)">Test Port 3002</button>
+        <br /><br />
+        <div id="check-results"></div>
+      </div>
+
+      <div class="app-links">
+        <a href="http://localhost:3000" target="_blank">Mở App (Port 3000)</a>
+        <a href="http://localhost:3001" target="_blank">Mở App (Port 3001)</a>
+        <a href="http://localhost:3002" target="_blank">Mở App (Port 3002)</a>
+      </div>
+
+      <div class="status success">
+        🎉 <strong>Hệ thống đã sẵn sàng!</strong> Bạn có thể đăng nhập ngay bây
+        giờ mà không lo bị treo.
+      </div>
+    </div>
+
+    <script>
+      async function checkPort(port) {
+        const resultDiv = document.getElementById('check-results');
+        resultDiv.innerHTML =
+          '<div class="loading"></div> Đang kiểm tra port ' + port + '...';
+
+        try {
+          const response = await fetch(`http://localhost:${port}`, {
+            method: 'GET',
+            mode: 'no-cors',
+          });
+
+          resultDiv.innerHTML = `
+                    <div class="status success">
+                        ✅ Port ${port} đang hoạt động!
+                        <a href="http://localhost:${port}" target="_blank" style="margin-left: 10px; color: #155724; text-decoration: underline;">Mở ứng dụng</a>
+                    </div>
+                `;
+        } catch (error) {
+          resultDiv.innerHTML = `
+                    <div class="status warning">
+                        ⚠️ Port ${port} không phản hồi. Thử port khác hoặc khởi động lại server.
+                    </div>
+                `;
+        }
+      }
+
+      // Auto check port 3000 when page loads
+      window.onload = function () {
+        setTimeout(() => checkPort(3000), 1000);
+      };
+    </script>
+  </body>
+</html>

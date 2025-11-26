@@ -118,12 +118,39 @@ create_logs() {
 cleanup_processes() {
     print_status "Cleaning up existing processes..."
 
-    # Kill processes on ports 3000 and 3001
+    # Kill processes on ports 3000, 3001, 8000, 8001
+    for PORT in 3000 3001 8000 8001; do
+        PIDS=$(lsof -ti:$PORT 2>/dev/null)
+        if [ ! -z "$PIDS" ]; then
+            print_warning "Port $PORT is in use. Killing processes..."
+            for PID in $PIDS; do
+                PROCESS=$(ps -p $PID -o command= 2>/dev/null)
+                if echo "$PROCESS" | grep -qE "(react-scripts|node.*server|python.*main|uvicorn)"; then
+                    print_status "Killing PID $PID on port $PORT"
+                    kill -9 $PID 2>/dev/null || true
+                fi
+            done
+        fi
+    done
+
+    # Kill by process name as fallback
     pkill -f "react-scripts start" 2>/dev/null || true
     pkill -f "node.*server.js" 2>/dev/null || true
     pkill -f "python.*main.py" 2>/dev/null || true
+    pkill -f "uvicorn.*main" 2>/dev/null || true
 
     sleep 2
+
+    # Verify ports are free
+    for PORT in 3000 3001 8000 8001; do
+        PIDS=$(lsof -ti:$PORT 2>/dev/null)
+        if [ -z "$PIDS" ]; then
+            print_success "Port $PORT is now free ✅"
+        else
+            print_warning "Port $PORT still in use (may need manual cleanup)"
+        fi
+    done
+
     print_success "Cleanup completed ✅"
 }
 
@@ -157,27 +184,41 @@ start_backend() {
 start_automation() {
     print_status "Starting Automation (Python)..."
 
-    cd automation
+    cd one_automation_system
 
     # Check if virtual environment exists
     if [ -d "venv" ]; then
         source venv/bin/activate
         print_status "Activated Python virtual environment"
+    elif [ -d "../automation/venv" ]; then
+        source ../automation/venv/bin/activate
+        print_status "Activated Python virtual environment from automation folder"
     else
         print_warning "Python virtual environment not found. Using system Python."
     fi
 
-    # Check if Google credentials exist
-    if [ ! -f "config/google-credentials.json" ]; then
-        print_warning "Google credentials not found. Automation may not work properly."
-        print_warning "Copy your credentials to automation/config/google-credentials.json"
+    # Check if main.py exists
+    if [ ! -f "main.py" ]; then
+        print_error "main.py not found in one_automation_system/"
+        print_error "Automation service cannot start!"
+        cd ..
+        return 1
     fi
 
-    python src/main.py > ../logs/automation.log 2>&1 &
+    # Check if uvicorn is available
+    if ! python -c "import uvicorn" 2>/dev/null; then
+        print_warning "uvicorn not found. Installing..."
+        pip install uvicorn fastapi > /dev/null 2>&1 || true
+    fi
+
+    # Start using uvicorn (FastAPI)
+    print_status "Starting FastAPI automation service on port 8001..."
+    python -m uvicorn main:app --host 0.0.0.0 --port 8001 > ../logs/automation.log 2>&1 &
     AUTOMATION_PID=$!
     cd ..
 
     print_success "Automation started with PID: $AUTOMATION_PID"
+    echo "🤖 Automation URL: http://localhost:8001"
 }
 
 # Monitor services

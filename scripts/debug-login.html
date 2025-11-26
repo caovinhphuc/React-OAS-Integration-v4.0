@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Debug Tool - MIA Warehouse</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .debug-panel {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .status-ok {
+        color: green;
+      }
+      .status-error {
+        color: red;
+      }
+      .status-warning {
+        color: orange;
+      }
+      button {
+        background: #007cba;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover {
+        background: #005a87;
+      }
+      .clear-btn {
+        background: #dc3545;
+      }
+      .clear-btn:hover {
+        background: #c82333;
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        font-family: monospace;
+        background: #f8f9fa;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      input[type='text'],
+      input[type='password'] {
+        width: 200px;
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 MIA Warehouse Login Debug Tool</h1>
+
+    <div class="debug-panel">
+      <h2>🔍 System Status</h2>
+      <div id="system-status">
+        <div>
+          📡 <strong>Connection Status:</strong>
+          <span id="connection-status">Checking...</span>
+        </div>
+        <div>
+          🔒 <strong>Login Blocks:</strong>
+          <span id="login-blocks">Checking...</span>
+        </div>
+        <div>
+          💾 <strong>Stored Session:</strong>
+          <span id="stored-session">Checking...</span>
+        </div>
+        <div>
+          🌐 <strong>Google Sheets API:</strong>
+          <span id="api-status">Checking...</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="debug-panel">
+      <h2>🧹 Clear Login Issues</h2>
+      <button onclick="clearLoginBlocks()" class="clear-btn">
+        Clear Login Blocks
+      </button>
+      <button onclick="clearStoredSessions()" class="clear-btn">
+        Clear Stored Sessions
+      </button>
+      <button onclick="clearAllAuthData()" class="clear-btn">
+        Clear All Auth Data
+      </button>
+      <button onclick="refreshPage()">Refresh & Reload</button>
+    </div>
+
+    <div class="debug-panel">
+      <h2>🧪 Test Login</h2>
+      <div>
+        <input
+          type="text"
+          id="test-username"
+          placeholder="Username"
+          value="manager"
+        />
+        <input
+          type="password"
+          id="test-password"
+          placeholder="Password"
+          value="manager123"
+        />
+        <button onclick="testLogin()">Test Login</button>
+      </div>
+      <div id="login-result" style="margin-top: 10px"></div>
+    </div>
+
+    <div class="debug-panel">
+      <h2>📋 Debug Log</h2>
+      <textarea id="debug-log" readonly></textarea>
+      <button onclick="clearLog()">Clear Log</button>
+      <button onclick="downloadLog()">Download Log</button>
+    </div>
+
+    <div class="debug-panel">
+      <h2>🔗 Quick Actions</h2>
+      <button onclick="window.open('http://localhost:3000', '_blank')">
+        Open Main App
+      </button>
+      <button onclick="window.open('http://localhost:3000/login', '_blank')">
+        Open Login Page
+      </button>
+      <button
+        onclick="window.open('http://localhost:3000/demo-accounts', '_blank')"
+      >
+        Demo Accounts
+      </button>
+    </div>
+
+    <script>
+      let debugLog = [];
+
+      function log(message, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = `[${timestamp}] ${type.toUpperCase()}: ${message}`;
+        debugLog.push(logEntry);
+        updateLogDisplay();
+        console.log(logEntry);
+      }
+
+      function updateLogDisplay() {
+        document.getElementById('debug-log').value = debugLog.join('\n');
+      }
+
+      function clearLog() {
+        debugLog = [];
+        updateLogDisplay();
+      }
+
+      function downloadLog() {
+        const logContent = debugLog.join('\n');
+        const blob = new Blob([logContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `mia-warehouse-debug-${new Date()
+          .toISOString()
+          .slice(0, 19)}.log`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      // Check system status
+      function checkSystemStatus() {
+        log('Starting system status check...');
+
+        // Check login blocks
+        try {
+          const blockInfo = localStorage.getItem('loginBlock');
+          if (blockInfo) {
+            const block = JSON.parse(blockInfo);
+            const timeLeft = Math.max(
+              0,
+              300000 - (Date.now() - block.timestamp)
+            );
+            if (timeLeft > 0) {
+              document.getElementById('login-blocks').innerHTML =
+                '<span class="status-error">BLOCKED (' +
+                Math.ceil(timeLeft / 1000) +
+                's remaining)</span>';
+              log(
+                'Login block active: ' +
+                  Math.ceil(timeLeft / 1000) +
+                  ' seconds remaining',
+                'error'
+              );
+            } else {
+              document.getElementById('login-blocks').innerHTML =
+                '<span class="status-warning">Expired block found</span>';
+              log('Expired login block found', 'warning');
+            }
+          } else {
+            document.getElementById('login-blocks').innerHTML =
+              '<span class="status-ok">No blocks</span>';
+            log('No login blocks found', 'success');
+          }
+        } catch (e) {
+          document.getElementById('login-blocks').innerHTML =
+            '<span class="status-error">Error checking</span>';
+          log('Error checking login blocks: ' + e.message, 'error');
+        }
+
+        // Check stored sessions
+        try {
+          const currentUser = localStorage.getItem('currentUser');
+          const authToken = sessionStorage.getItem('authToken');
+
+          if (currentUser && authToken) {
+            const user = JSON.parse(currentUser);
+            document.getElementById('stored-session').innerHTML =
+              '<span class="status-ok">Active (' + user.name + ')</span>';
+            log('Active session found for: ' + user.name, 'success');
+          } else if (currentUser || authToken) {
+            document.getElementById('stored-session').innerHTML =
+              '<span class="status-warning">Partial session</span>';
+            log('Partial session data found', 'warning');
+          } else {
+            document.getElementById('stored-session').innerHTML =
+              '<span class="status-ok">No session</span>';
+            log('No stored session found', 'info');
+          }
+        } catch (e) {
+          document.getElementById('stored-session').innerHTML =
+            '<span class="status-error">Error checking</span>';
+          log('Error checking stored session: ' + e.message, 'error');
+        }
+
+        // Test Google Sheets API
+        testGoogleSheetsAPI();
+      }
+
+      async function testGoogleSheetsAPI() {
+        try {
+          const API_KEY = 'AIzaSyCN7XtLCOgqXbSsiJyKkxGGaM26RFKvvcc';
+          const SHEET_ID = '1m2B2ODXuuatnW0EKExdVeCa1WwvF52bZOhS7DGqG6Vg';
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Users!A:H?key=${API_KEY}`;
+
+          log('Testing Google Sheets API connection...');
+
+          const response = await fetch(url);
+
+          if (response.ok) {
+            const data = await response.json();
+            document.getElementById('api-status').innerHTML =
+              '<span class="status-ok">Connected (' +
+              (data.values ? data.values.length : 0) +
+              ' rows)</span>';
+            log(
+              'Google Sheets API connection successful. Found ' +
+                (data.values ? data.values.length : 0) +
+                ' rows',
+              'success'
+            );
+          } else {
+            document.getElementById('api-status').innerHTML =
+              '<span class="status-error">API Error (' +
+              response.status +
+              ')</span>';
+            log(
+              'Google Sheets API error: ' +
+                response.status +
+                ' ' +
+                response.statusText,
+              'error'
+            );
+          }
+        } catch (e) {
+          document.getElementById('api-status').innerHTML =
+            '<span class="status-error">Connection failed</span>';
+          log('Google Sheets API connection failed: ' + e.message, 'error');
+        }
+      }
+
+      // Clear functions
+      function clearLoginBlocks() {
+        try {
+          localStorage.removeItem('loginBlock');
+          log('Login blocks cleared successfully', 'success');
+          checkSystemStatus();
+        } catch (e) {
+          log('Error clearing login blocks: ' + e.message, 'error');
+        }
+      }
+
+      function clearStoredSessions() {
+        try {
+          localStorage.removeItem('currentUser');
+          sessionStorage.removeItem('authToken');
+          sessionStorage.removeItem('loginTime');
+          localStorage.removeItem('rememberedUsername');
+          log('Stored sessions cleared successfully', 'success');
+          checkSystemStatus();
+        } catch (e) {
+          log('Error clearing stored sessions: ' + e.message, 'error');
+        }
+      }
+
+      function clearAllAuthData() {
+        try {
+          // Clear all auth-related data
+          const authKeys = [
+            'loginBlock',
+            'currentUser',
+            'rememberedUsername',
+            'mia-warehouse-token',
+            'mia-warehouse-user',
+          ];
+          authKeys.forEach((key) => localStorage.removeItem(key));
+
+          const sessionKeys = [
+            'authToken',
+            'loginTime',
+            'demo-username',
+            'demo-password',
+          ];
+          sessionKeys.forEach((key) => sessionStorage.removeItem(key));
+
+          log('All authentication data cleared successfully', 'success');
+          checkSystemStatus();
+        } catch (e) {
+          log('Error clearing all auth data: ' + e.message, 'error');
+        }
+      }
+
+      function refreshPage() {
+        log('Refreshing page...', 'info');
+        window.location.reload();
+      }
+
+      // Test login function
+      async function testLogin() {
+        const username = document.getElementById('test-username').value;
+        const password = document.getElementById('test-password').value;
+        const resultDiv = document.getElementById('login-result');
+
+        if (!username || !password) {
+          resultDiv.innerHTML =
+            '<span class="status-error">Please enter username and password</span>';
+          return;
+        }
+
+        log('Testing login with username: ' + username);
+        resultDiv.innerHTML =
+          '<span class="status-warning">Testing login...</span>';
+
+        try {
+          // Test demo accounts first
+          const demoAccounts = {
+            manager: 'manager123',
+            staff: 'staff123',
+            supervisor: 'super123',
+            admin: 'admin123',
+          };
+
+          if (demoAccounts[username] === password) {
+            resultDiv.innerHTML =
+              '<span class="status-ok">✅ Demo account credentials valid!</span>';
+            log(
+              'Demo account login test successful for: ' + username,
+              'success'
+            );
+
+            // Test if we can store the session
+            try {
+              const userData = {
+                id: 'demo-' + username,
+                name: username.charAt(0).toUpperCase() + username.slice(1),
+                email: username + '@mia.com',
+                role: username === 'manager' ? 'Warehouse Manager' : 'Staff',
+                department: 'Operations',
+              };
+
+              localStorage.setItem('currentUser', JSON.stringify(userData));
+              sessionStorage.setItem('authToken', 'demo-token-' + Date.now());
+
+              log('Session storage test successful', 'success');
+            } catch (e) {
+              log('Session storage test failed: ' + e.message, 'error');
+            }
+          } else {
+            resultDiv.innerHTML =
+              '<span class="status-error">❌ Invalid credentials</span>';
+            log('Demo account login test failed for: ' + username, 'error');
+          }
+        } catch (e) {
+          resultDiv.innerHTML =
+            '<span class="status-error">❌ Test failed: ' +
+            e.message +
+            '</span>';
+          log('Login test error: ' + e.message, 'error');
+        }
+      }
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function () {
+        log('MIA Warehouse Login Debug Tool initialized');
+        checkSystemStatus();
+      });
+    </script>
+  </body>
+</html>

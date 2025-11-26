@@ -4,14 +4,9 @@
 
 [2] 
 [2] > react-oas-integration@3.0.0 ai-service
-[2] > cd ai-service && python -m uvicorn main_simple:app --host 0.0.0.0 --port 8000 --reload
-[2] 
-[0] 
-[0] > react-oas-integration@3.0.0 start
-[0] > react-scripts start
-[0] 
-[1] 
-[1] > react-oas-integration@3.0.0 backend
+[2] > cd ai-service && python -m uvicorn main_simple:app --host 0.0.0.0 --port 8000 -- HTTP  11/26/2025 7:43:20 AM ::1 GET /
+ HTTP  11/26/2025 7:43:20 AM ::1 Returned 200 in 15 ms
+1] > react-oas-integration@3.0.0 backend
 [1] > cd backend && npm start
 [1] 
 [1] 
@@ -19,7 +14,8 @@
 [1] > node server.js
 [1] 
 [2] INFO:     Will watch for changes in these directories: ['/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/ai-service']
-[2] ERROR:    [Errno 48] Address already in use
+[2] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[2] INFO:     Started reloader process [20355] using WatchFiles
 [1] node:events:486
 [1]       throw er; // Unhandled 'error' event
 [1]       ^
@@ -47,6 +43,495 @@
 [1] 
 [1] Node.js v25.2.1
 [1] npm run backend exited with code 1
-[2] npm run ai-service exited with code 1
-[0] Something is already running on port 3000.
-[0] npm run start exited with code 0
+[2] INFO:     Started server process [20392]
+[2] INFO:     Waiting for application startup.
+[2] INFO:     Application startup complete.
+[0] (node:20361) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[0] (Use `node --trace-deprecation ...` to show where the warning was created)
+[0] (node:20361) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[0] Starting the development server...
+[0] 
+[0] Compiled successfully!
+[0] 
+[0] You can now view react-oas-integration in the browser.
+[0] 
+[0]   Local:            http://localhost:3000
+[0]   On Your Network:  http://192.168.10.80:3000
+[0] 
+[0] Note that the development build is not optimized.
+[0] To create a production build, use npm run build.
+[0] 
+[0] webpack compiled successfully
+[2] INFO:     127.0.0.1:63151 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63406 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63443 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63638 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63640 - "GET /api/models HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63640 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:63638 - "GET /api/models HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[2] INFO:     127.0.0.1:63788 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[0] Compiling...
+[0] Compiled successfully!
+[0] webpack compiled successfully
+[2] INFO:     127.0.0.1:64091 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:64201 - "GET /health HTTP/1.1" 200 OK
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './components/google/GoogleSheetsIntegration' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 18:62-115
+[0] Module not found: Error: Can't resolve './components/google/GoogleSheetsIntegration' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] webpack compiled with 1 error
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/Common/common'.
+[0] ERROR in ./src/components/google/GoogleSheetsIntegration.jsx 7:0-40
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/Common/common'.
+[0] 
+[0] webpack compiled with 1 error
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './components/dashboard/LiveDashboard' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Can't resolve './components/dashboard/LiveDashboard' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] ERROR in ./src/components/google/GoogleSheetsIntegration.jsx 7:0-40
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/Common/common'.
+[0] 
+[0] webpack compiled with 2 errors
+[2] INFO:     127.0.0.1:64253 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/Common/common'.
+[0] ERROR in ./src/components/google/GoogleSheetsIntegration.jsx 7:0-40
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/Common/common'.
+[0] 
+[0] webpack compiled with 1 error
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './components/common/Loading' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 9:0-50
+[0] Module not found: Error: Can't resolve './components/common/Loading' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] 
+[0] ERROR in ./src/components/google/GoogleSheetsIntegration.jsx 7:0-40
+[0] Module not found: Error: Can't resolve '../Common/Loading' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/google'
+[0] 
+[0] webpack compiled with 3 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] WARNING in ./src/components/Common/Loading.jsx
+[0] There are multiple modules with names that only differ in casing.
+[0] This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+[0] Use equal casing. Compare these module identifiers:
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/Common/Loading.jsx
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/google/GoogleSheetsIntegration.jsx
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/common/Loading.jsx
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/App.jsx
+[0] 
+[0] WARNING in ./src/components/Common/Loading.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/Common/Loading.css)
+[0] There are multiple modules with names that only differ in casing.
+[0] This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+[0] Use equal casing. Compare these module identifiers:
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/Common/Loading.css
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/style-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/Common/Loading.css
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/common/Loading.css
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/style-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/common/Loading.css
+[0] 
+[0] WARNING in ./src/components/Common/Loading.css
+[0] There are multiple modules with names that only differ in casing.
+[0] This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+[0] Use equal casing. Compare these module identifiers:
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/style-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/Common/Loading.css
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/Common/Loading.jsx
+[0] * /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/style-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/common/Loading.css
+[0]     Used by 1 module(s), i. e.
+[0]     /Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[1].oneOf[3]!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/node_modules/source-map-loader/dist/cjs.js!/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/common/Loading.jsx
+[0] 
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] 
+[0] webpack compiled with 1 error and 3 warnings
+[2] INFO:     127.0.0.1:64307 - "GET /health HTTP/1.1" 200 OK
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] ERROR in ./src/App.jsx 9:0-50
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] 
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] 
+[0] ERROR in ./src/App.jsx 16:50-87
+[0] Module not found: Error: Can't resolve './components/ai/AIDashboard' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] webpack compiled with 3 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] ERROR in ./src/App.jsx 9:0-50
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] 
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] 
+[0] webpack compiled with 2 errors
+[2] INFO:     127.0.0.1:64438 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] ERROR in ./src/App.jsx 9:0-50
+[0] Module not found: Error: Cannot find file: 'Loading.jsx' does not match the corresponding name on disk: './src/components/common/Common'.
+[0] 
+[0] ERROR in ./src/App.jsx 14:51-97
+[0] Module not found: Error: Cannot find file: 'LiveDashboard.jsx' does not match the corresponding name on disk: './src/components/dashboard/Dashboard'.
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 5 errors
+[2] INFO:     127.0.0.1:64568 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:64675 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:64729 - "GET /health HTTP/1.1" 200 OK
+[2] INFO:     127.0.0.1:64770 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 9:0-22
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 10 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 9:0-22
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 10 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] ERROR in ./src/App.jsx 9:0-22
+[0] Module not found: Error: Can't resolve './global.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src'
+[0] 
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 10 errors
+[2] INFO:     127.0.0.1:65007 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[2] INFO:     127.0.0.1:65088 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[2] INFO:     127.0.0.1:65337 - "GET /health HTTP/1.1" 200 OK
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[0] Compiling...
+[0] Failed to compile.
+[0] 
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] ERROR in ./src/App.jsx 35:56-102
+[0] Module not found: Error: Cannot find file: 'AlertsManagement.jsx' does not match the corresponding name on disk: './src/components/alerts/Alerts'.
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 16:0-70
+[0] Module not found: Error: Can't resolve 'react-grid-layout' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 17:0-40
+[0] Module not found: Error: Can't resolve 'react-dnd' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 18:0-55
+[0] Module not found: Error: Can't resolve 'react-dnd-html5-backend' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 25:0-42
+[0] Module not found: Error: Can't resolve 'react-grid-layout/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/components/analytics/AdvancedAnalyticsDashboard.jsx 26:0-40
+[0] Module not found: Error: Can't resolve 'react-resizable/css/styles.css' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/components/analytics'
+[0] 
+[0] ERROR in ./src/store/store.js 4:0-61
+[0] Module not found: Error: Can't resolve 'redux-persist' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 5:0-48
+[0] Module not found: Error: Can't resolve 'redux-persist/lib/storage' in '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/src/store'
+[0] 
+[0] ERROR in ./src/store/store.js 35:67-72
+[0] export 'thunk' (imported as 'thunk') was not found in 'redux-thunk' (possible exports: default)
+[0] 
+[0] webpack compiled with 9 errors
+[2] INFO:     Shutting down
+[2] INFO:     Waiting for application shutdown.
+[2] INFO:     Application shutdown complete.
+[2] INFO:     Finished server process [20392]
+[0] npm run start exited with code SIGINT
+[2] INFO:     Stopping reloader process [20355]
+[2] npm run ai-service exited with code SIGINT

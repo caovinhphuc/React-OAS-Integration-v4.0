@@ -1,0 +1,87 @@
+{
+  "title": "Telegram Integration Test Report",
+  "timestamp": "2025-11-26T00:11:10.369Z",
+  "summary": {
+    "total_tests": 6,
+    "passed": 6,
+    "failed": 0,
+    "warnings": 0
+  },
+  "configuration": {
+    "bot_token": "configured",
+    "chat_id": "configured",
+    "api_url": "https://api.telegram.org/bot8434038911:AAEsXilwvPkpCNxt0pAZybgXag7xJnNpmN0"
+  },
+  "results": [
+    {
+      "test": "environment-check",
+      "status": "success",
+      "message": "Tất cả environment variables cần thiết đã có",
+      "details": {
+        "required_count": 2
+      },
+      "timestamp": "2025-11-26T00:11:07.755Z"
+    },
+    {
+      "test": "bot-info",
+      "status": "success",
+      "message": "Bot kết nối thành công: mia-logistics-manager",
+      "details": {
+        "id": 8434038911,
+        "username": "mia_logistics_manager_bot",
+        "first_name": "mia-logistics-manager",
+        "can_join_groups": true,
+        "can_read_all_group_messages": false,
+        "supports_inline_queries": false
+      },
+      "timestamp": "2025-11-26T00:11:08.462Z"
+    },
+    {
+      "test": "webhook-info",
+      "status": "success",
+      "message": "Webhook đã được cấu hình",
+      "details": {
+        "url": "https://authorises.cyou/webhook/8434038911:AAEsXilwvPkpCNxt0pAZybgXag7xJnNpmN0",
+        "has_custom_certificate": false,
+        "pending_update_count": 0
+      },
+      "timestamp": "2025-11-26T00:11:08.688Z"
+    },
+    {
+      "test": "chat-info",
+      "status": "success",
+      "message": "Thông tin chat lấy thành công: MIA.vn-Logistics",
+      "details": {
+        "id": -4818209867,
+        "type": "group",
+        "title": "MIA.vn-Logistics"
+      },
+      "timestamp": "2025-11-26T00:11:08.900Z"
+    },
+    {
+      "test": "send-message",
+      "status": "success",
+      "message": "Tin nhắn test đã được gửi thành công",
+      "details": {
+        "message_id": 630,
+        "chat_id": -4818209867,
+        "chat_type": "group",
+        "chat_title": "MIA.vn-Logistics",
+        "date": "2025-11-26T00:11:09.000Z"
+      },
+      "timestamp": "2025-11-26T00:11:09.343Z"
+    },
+    {
+      "test": "file-upload",
+      "status": "success",
+      "message": "File test đã được upload thành công",
+      "details": {
+        "file_id": "BQACAgUAAxkDAAICd2kmRZ4zVhAzXZV2xdehrSi3ab7cAAJxGQAC1FwxVaZiNdoCm-dLNgQ",
+        "file_name": "telegram-test-report.json",
+        "file_size": 2028,
+        "mime_type": "application/json"
+      },
+      "timestamp": "2025-11-26T00:11:10.369Z"
+    }
+  ]
+}

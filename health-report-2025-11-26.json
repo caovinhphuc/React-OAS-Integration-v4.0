@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-11-26T00:00:11.783Z",
+  "overall": "unhealthy",
+  "services": {
+    "file-system": {
+      "status": "healthy",
+      "message": "All required files and directories present",
+      "details": null,
+      "timestamp": "2025-11-26T00:00:11.785Z"
+    },
+    "dependencies": {
+      "status": "healthy",
+      "message": "All critical dependencies present",
+      "details": null,
+      "timestamp": "2025-11-26T00:00:11.785Z"
+    },
+    "environment": {
+      "status": "error",
+      "message": "Missing required environment variables: REACT_APP_GOOGLE_CLIENT_EMAIL, REACT_APP_GOOGLE_PRIVATE_KEY, REACT_APP_GOOGLE_PROJECT_ID, REACT_APP_GOOGLE_SHEET_ID",
+      "details": null,
+      "timestamp": "2025-11-26T00:00:11.785Z"
+    }
+  },
+  "errors": [
+    {
+      "service": "environment",
+      "message": "Missing required environment variables: REACT_APP_GOOGLE_CLIENT_EMAIL, REACT_APP_GOOGLE_PRIVATE_KEY, REACT_APP_GOOGLE_PROJECT_ID, REACT_APP_GOOGLE_SHEET_ID",
+      "details": null
+    }
+  ],
+  "warnings": []
+}
