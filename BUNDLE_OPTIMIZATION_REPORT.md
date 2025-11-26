@@ -1,34 +1,34 @@
 # 📊 Bundle Optimization Report
 
-**Generated:** 06:28:52 26/11/2025
+**Generated:** 09:49:15 26/11/2025
 
 ## 📦 Bundle Sizes
 
 | Type | Current | Budget | Status |
 |------|---------|--------|--------|
-| JavaScript | 713.08 KB | 250 KB | ❌ OVER |
-| CSS | 20.87 KB | 50 KB | ✅ OK |
+| JavaScript | 11.73 MB | 250 KB | ❌ OVER |
+| CSS | 205.29 KB | 50 KB | ❌ OVER |
 | Images | 0 Bytes | 500 KB | ✅ OK |
-| Total | 733.95 KB | 1 MB | ✅ OK |
+| Total | 11.93 MB | 1 MB | ❌ OVER |
 
 ## 📁 Top Largest Files
 
 ```
-1. static/js/25.b7f1077e.chunk.js - 384.32 KB
-2. static/js/main.897940c5.js - 283.16 KB
-3. static/js/360.cd430326.chunk.js - 25.71 KB
-4. static/css/main.ecee5a4d.css - 9.21 KB
-5. static/js/382.724313e7.chunk.js - 6.66 KB
-6. static/js/166.12650923.chunk.js - 5.25 KB
-7. static/js/114.05873b49.chunk.js - 5.06 KB
-8. static/css/166.c630437e.chunk.css - 4.48 KB
-9. static/css/382.d93a6b46.chunk.css - 4.19 KB
-10. static/css/114.804776c9.chunk.css - 2.99 KB
-11. static/js/main.897940c5.js.LICENSE.txt - 2.61 KB
-12. favicon.ico - 1.46 KB
-13. .htaccess - 1.16 KB
-14. index.html - 949 Bytes
-15. asset-manifest.json - 850 Bytes
+1. static/js/main.185cf0a1.js.map - 2.83 MB
+2. static/js/119.6e711040.chunk.js.map - 1.55 MB
+3. static/js/598.635cd680.chunk.js.map - 718.23 KB
+4. static/js/main.185cf0a1.js - 677.25 KB
+5. static/js/512.e2439796.chunk.js.map - 533.51 KB
+6. static/js/443.97304676.chunk.js.map - 509.44 KB
+7. static/js/138.f2b61a74.chunk.js.map - 454.44 KB
+8. static/js/119.6e711040.chunk.js - 373.27 KB
+9. static/js/131.6e8db8e0.chunk.js.map - 368.53 KB
+10. static/js/37.ea055602.chunk.js.map - 350.78 KB
+11. static/js/576.77c49862.chunk.js.map - 215.33 KB
+12. static/js/403.3f1f9693.chunk.js.map - 175.7 KB
+13. static/js/598.635cd680.chunk.js - 165.52 KB
+14. static/js/645.23ee9d4a.chunk.js.map - 142.75 KB
+15. static/js/137.8b4bb879.chunk.js.map - 138.64 KB
 ```
 
 ## 💡 Recommendations
@@ -42,6 +42,23 @@
 - Xóa unused imports và dependencies
 - Sử dụng tree-shaking để loại bỏ code không dùng
 - Code splitting theo routes thay vì chỉ components
+
+
+### 2. CSS bundle quá lớn [MEDIUM]
+
+- Import chỉ các component Ant Design cần thiết
+- Sử dụng CSS modules thay vì global CSS
+- Xóa unused CSS classes
+- Sử dụng PurgeCSS để loại bỏ CSS không dùng
+
+
+### 3. Tổng bundle size vượt quá budget [HIGH]
+
+- Sử dụng source-map-explorer để phân tích chi tiết
+- Chạy: npm run analyze:bundle
+- Tối ưu hóa images (WebP, compression)
+- Chỉ load libraries khi cần (lazy loading)
+- Enable gzip/brotli compression trên server
 
 
 ## 🚀 Next Steps

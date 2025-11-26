@@ -1,32 +1,106 @@
 {
-  "timestamp": "2025-11-26T00:00:11.783Z",
+  "timestamp": "2025-11-26T03:05:43.333Z",
   "overall": "unhealthy",
   "services": {
     "file-system": {
       "status": "healthy",
       "message": "All required files and directories present",
       "details": null,
-      "timestamp": "2025-11-26T00:00:11.785Z"
+      "timestamp": "2025-11-26T03:05:43.334Z"
     },
     "dependencies": {
       "status": "healthy",
       "message": "All critical dependencies present",
       "details": null,
-      "timestamp": "2025-11-26T00:00:11.785Z"
+      "timestamp": "2025-11-26T03:05:43.334Z"
     },
     "environment": {
-      "status": "error",
-      "message": "Missing required environment variables: REACT_APP_GOOGLE_CLIENT_EMAIL, REACT_APP_GOOGLE_PRIVATE_KEY, REACT_APP_GOOGLE_PROJECT_ID, REACT_APP_GOOGLE_SHEET_ID",
+      "status": "warning",
+      "message": "Missing optional environment variables: SMTP_USER, SMTP_PASS",
       "details": null,
-      "timestamp": "2025-11-26T00:00:11.785Z"
+      "timestamp": "2025-11-26T03:05:43.334Z"
+    },
+    "google-sheets": {
+      "status": "error",
+      "message": "Google Sheets API connection failed: error:1E08010C:DECODER routines::unsupported",
+      "details": {
+        "error": "error:1E08010C:DECODER routines::unsupported",
+        "code": "ERR_OSSL_UNSUPPORTED"
+      },
+      "timestamp": "2025-11-26T03:05:43.906Z"
+    },
+    "google-drive": {
+      "status": "error",
+      "message": "Google Drive API connection failed: error:1E08010C:DECODER routines::unsupported",
+      "details": {
+        "error": "error:1E08010C:DECODER routines::unsupported",
+        "code": "ERR_OSSL_UNSUPPORTED"
+      },
+      "timestamp": "2025-11-26T03:05:43.906Z"
+    },
+    "email-service": {
+      "status": "warning",
+      "message": "No email service configured (neither SendGrid nor SMTP)",
+      "details": {
+        "sendgrid_configured": true,
+        "smtp_configured": false
+      },
+      "timestamp": "2025-11-26T03:05:44.495Z"
+    },
+    "telegram-service": {
+      "status": "error",
+      "message": "Telegram service connection failed: Request failed with status code 404",
+      "details": {
+        "error": "Request failed with status code 404"
+      },
+      "timestamp": "2025-11-26T03:05:45.225Z"
     }
   },
   "errors": [
     {
-      "service": "environment",
-      "message": "Missing required environment variables: REACT_APP_GOOGLE_CLIENT_EMAIL, REACT_APP_GOOGLE_PRIVATE_KEY, REACT_APP_GOOGLE_PROJECT_ID, REACT_APP_GOOGLE_SHEET_ID",
-      "details": null
+      "service": "google-sheets",
+      "message": "Google Sheets API connection failed: error:1E08010C:DECODER routines::unsupported",
+      "details": {
+        "error": "error:1E08010C:DECODER routines::unsupported",
+        "code": "ERR_OSSL_UNSUPPORTED"
+      }
+    },
+    {
+      "service": "google-drive",
+      "message": "Google Drive API connection failed: error:1E08010C:DECODER routines::unsupported",
+      "details": {
+        "error": "error:1E08010C:DECODER routines::unsupported",
+        "code": "ERR_OSSL_UNSUPPORTED"
+      }
+    },
+    {
+      "service": "telegram-service",
+      "message": "Telegram service connection failed: Request failed with status code 404",
+      "details": {
+        "error": "Request failed with status code 404"
+      }
     }
   ],
-  "warnings": []
+  "warnings": [
+    {
+      "service": "environment",
+      "message": "Missing optional environment variables: SMTP_USER, SMTP_PASS",
+      "details": null
+    },
+    {
+      "service": "email-service",
+      "message": "SendGrid API failed: Request failed with status code 401, trying SMTP fallback",
+      "details": {
+        "error": "Request failed with status code 401"
+      }
+    },
+    {
+      "service": "email-service",
+      "message": "No email service configured (neither SendGrid nor SMTP)",
+      "details": {
+        "sendgrid_configured": true,
+        "smtp_configured": false
+      }
+    }
+  ]
 }

@@ -10,9 +10,3 @@
 🚀 Backend server running on port 3001
 📊 Health check: http://localhost:3001/health
 🌐 WebSocket server ready for connections
-[32m[nodemon] restarting child process[39m
-[32m[nodemon] starting `node server.js`[39m
-🚀 Backend server running on port 3001
-📊 Health check: http://localhost:3001/health
-🌐 WebSocket server ready for connections
-::1 - - [26/Nov/2025:02:20:28 +0000] "POST /api/auth/login HTTP/1.1" 404 154 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"

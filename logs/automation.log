@@ -1,9 +1,9 @@
-INFO:     Started server process [4800]
+INFO:     Started server process [74040]
 INFO:     Waiting for application startup.
-2025-11-26 09:18:02,381 - main - INFO - 🚀 Starting OneAutomation System...
-2025-11-26 09:18:02,468 - main - INFO - ✅ Google Sheets service initialized
-2025-11-26 09:18:02,468 - main - INFO - ✅ Email service initialized
-2025-11-26 09:18:02,468 - main - INFO - ✅ Data processor initialized
-2025-11-26 09:18:02,468 - main - INFO - 🎉 OneAutomation System started successfully!
+2025-11-26 10:41:37,914 - main - INFO - 🚀 Starting OneAutomation System...
+2025-11-26 10:41:37,992 - main - INFO - ✅ Google Sheets service initialized
+2025-11-26 10:41:37,992 - main - INFO - ✅ Email service initialized
+2025-11-26 10:41:37,992 - main - INFO - ✅ Data processor initialized
+2025-11-26 10:41:37,992 - main - INFO - 🎉 OneAutomation System started successfully!
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)

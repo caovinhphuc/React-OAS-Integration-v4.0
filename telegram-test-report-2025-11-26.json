@@ -1,6 +1,6 @@
 {
   "title": "Telegram Integration Test Report",
-  "timestamp": "2025-11-26T00:11:10.369Z",
+  "timestamp": "2025-11-26T02:41:35.168Z",
   "summary": {
     "total_tests": 6,
     "passed": 6,
@@ -20,7 +20,7 @@
       "details": {
         "required_count": 2
       },
-      "timestamp": "2025-11-26T00:11:07.755Z"
+      "timestamp": "2025-11-26T02:41:32.680Z"
     },
     {
       "test": "bot-info",
@@ -34,7 +34,7 @@
         "can_read_all_group_messages": false,
         "supports_inline_queries": false
       },
-      "timestamp": "2025-11-26T00:11:08.462Z"
+      "timestamp": "2025-11-26T02:41:33.370Z"
     },
     {
       "test": "webhook-info",
@@ -45,7 +45,7 @@
         "has_custom_certificate": false,
         "pending_update_count": 0
       },
-      "timestamp": "2025-11-26T00:11:08.688Z"
+      "timestamp": "2025-11-26T02:41:33.575Z"
     },
     {
       "test": "chat-info",
@@ -56,32 +56,32 @@
         "type": "group",
         "title": "MIA.vn-Logistics"
       },
-      "timestamp": "2025-11-26T00:11:08.900Z"
+      "timestamp": "2025-11-26T02:41:33.780Z"
     },
     {
       "test": "send-message",
       "status": "success",
       "message": "Tin nhắn test đã được gửi thành công",
       "details": {
-        "message_id": 630,
+        "message_id": 632,
         "chat_id": -4818209867,
         "chat_type": "group",
         "chat_title": "MIA.vn-Logistics",
-        "date": "2025-11-26T00:11:09.000Z"
+        "date": "2025-11-26T02:41:34.000Z"
       },
-      "timestamp": "2025-11-26T00:11:09.343Z"
+      "timestamp": "2025-11-26T02:41:34.222Z"
     },
     {
       "test": "file-upload",
       "status": "success",
       "message": "File test đã được upload thành công",
       "details": {
-        "file_id": "BQACAgUAAxkDAAICd2kmRZ4zVhAzXZV2xdehrSi3ab7cAAJxGQAC1FwxVaZiNdoCm-dLNgQ",
+        "file_id": "BQACAgUAAxkDAAICeWkmaN5qlX63QDekvC2-In2jYn8MAAJJFwAC1Fw5VXj3rYuaKH-QNgQ",
         "file_name": "telegram-test-report.json",
         "file_size": 2028,
         "mime_type": "application/json"
       },
-      "timestamp": "2025-11-26T00:11:10.369Z"
+      "timestamp": "2025-11-26T02:41:35.167Z"
     }
   ]
 }
