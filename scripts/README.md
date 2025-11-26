@@ -40,6 +40,63 @@ npm run test:sheets
 node scripts/testGoogleSheets.js
 ```
 
+### 🔗 Test API Endpoints
+
+**File:** `test-api-endpoints.js`
+**Mô tả:** Test tất cả các API endpoints của backend và AI service
+**Cách dùng:**
+
+```bash
+npm run test:api
+# hoặc
+node scripts/test-api-endpoints.js
+```
+
+### 🤖 Test Automation System
+
+**File:** `test-automation-system.js`
+**Mô tả:** Test các chức năng của Automation System (Python FastAPI)
+**Cách dùng:**
+
+```bash
+npm run test:automation
+# hoặc
+node scripts/test-automation-system.js
+```
+
+### 🔌 Test WebSocket
+
+**File:** `test-websocket.js`
+**Mô tả:** Test WebSocket connection giữa Frontend và Backend
+**Cách dùng:**
+
+```bash
+npm run test:websocket
+# hoặc
+node scripts/test-websocket.js
+```
+
+**Tính năng:**
+
+- ✅ Test WebSocket connection
+- ✅ Test welcome message
+- ✅ Test real-time data updates
+- ✅ Test AI analysis results
+
+### 🧪 Test All
+
+**File:** `test-all.js`
+**Mô tả:** Chạy tất cả các test suites trong dự án (comprehensive test runner)
+**Cách dùng:**
+
+```bash
+npm run test:complete
+# hoặc
+npm run test:scripts
+# hoặc
+node scripts/test-all.js
+```
+
 ### 🔧 Setup Script
 
 **File:** `setup.js`

@@ -1,18 +1,10 @@
-// Simple test file to satisfy CI/CD requirements
-describe('React OAS Integration v3.0', () => {
-  test('should have basic functionality', () => {
-    expect(true).toBe(true);
-  });
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-  test('should be a valid application', () => {
-    expect('React OAS Integration').toBe('React OAS Integration');
+test("renders MIA Retail app", () => {
+  render(<App />);
+  const brandElement = screen.getByText("MIA Retail", {
+    selector: ".brand-text",
   });
-
-  test('should have proper configuration', () => {
-    expect(process.env.NODE_ENV).toBeDefined();
-  });
-
-  test('should pass all basic checks', () => {
-    expect(1 + 1).toBe(2);
-  });
+  expect(brandElement).toBeInTheDocument();
 });

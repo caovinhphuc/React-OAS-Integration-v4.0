@@ -1,24 +1,24 @@
 {
-  "timestamp": "2025-11-25T22:56:31.405Z",
+  "timestamp": "2025-11-25T23:59:51.104Z",
   "overall": "unhealthy",
   "services": {
     "file-system": {
       "status": "healthy",
       "message": "All required files and directories present",
       "details": null,
-      "timestamp": "2025-11-25T22:56:31.406Z"
+      "timestamp": "2025-11-25T23:59:51.105Z"
     },
     "dependencies": {
-      "status": "warning",
-      "message": "Missing critical dependencies: googleapis, google-auth-library",
+      "status": "healthy",
+      "message": "All critical dependencies present",
       "details": null,
-      "timestamp": "2025-11-25T22:56:31.407Z"
+      "timestamp": "2025-11-25T23:59:51.106Z"
     },
     "environment": {
       "status": "error",
       "message": "Missing required environment variables: REACT_APP_GOOGLE_CLIENT_EMAIL, REACT_APP_GOOGLE_PRIVATE_KEY, REACT_APP_GOOGLE_PROJECT_ID, REACT_APP_GOOGLE_SHEET_ID",
       "details": null,
-      "timestamp": "2025-11-25T22:56:31.407Z"
+      "timestamp": "2025-11-25T23:59:51.106Z"
     }
   },
   "errors": [
@@ -28,11 +28,5 @@
       "details": null
     }
   ],
-  "warnings": [
-    {
-      "service": "dependencies",
-      "message": "Missing critical dependencies: googleapis, google-auth-library",
-      "details": null
-    }
-  ]
+  "warnings": []
 }

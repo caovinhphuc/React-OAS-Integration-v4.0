@@ -1,1 +1,9 @@
-/opt/homebrew/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/phuccao/Projects/React-OAS-Integration-v3.0/-React-OAS-Integration-v3.0/automation/src/main.py': [Errno 2] No such file or directory
+INFO:     Started server process [37407]
+INFO:     Waiting for application startup.
+2025-11-26 08:22:28,030 - main - INFO - 🚀 Starting OneAutomation System...
+2025-11-26 08:22:28,103 - main - INFO - ✅ Google Sheets service initialized
+2025-11-26 08:22:28,103 - main - INFO - ✅ Email service initialized
+2025-11-26 08:22:28,103 - main - INFO - ✅ Data processor initialized
+2025-11-26 08:22:28,103 - main - INFO - 🎉 OneAutomation System started successfully!
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)

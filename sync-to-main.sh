@@ -113,10 +113,17 @@ done
 if ! git diff --quiet || ! git diff --cached --quiet; then
   log "Đang commit changes..."
   git add "${COMPONENT_DIRS[@]}" "${CRITICAL_FILES[@]}" 2>/dev/null || true
+<<<<<<< HEAD
   
   # Add all changes
   git add -A
   
+=======
+
+  # Add all changes
+  git add -A
+
+>>>>>>> upgrade/phase-1-security
   if git diff --cached --quiet; then
     log "Không có thay đổi nào để commit"
   else
@@ -130,9 +137,15 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
       [ "$STASHED" = true ] && git stash pop || true
       exit 1
     }
+<<<<<<< HEAD
     
     log "✅ Đã commit vào $MAIN_BRANCH"
     
+=======
+
+    log "✅ Đã commit vào $MAIN_BRANCH"
+
+>>>>>>> upgrade/phase-1-security
     echo ""
     read -p "🚀 Push lên GitHub? (y/n): " -n 1 -r
     echo ""
