@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-<<<<<<< HEAD
-import Loading from "../Common/Loading";
-=======
 import Loading from "../common/Loading";
->>>>>>> upgrade/phase-1-security
 import "./AutomationDashboard.css";
 
 const AutomationDashboard = () => {
