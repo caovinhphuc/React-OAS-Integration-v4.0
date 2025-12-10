@@ -2,6 +2,10 @@
 > react-oas-integration@3.0.0 dev
 > concurrently "npm run start" "npm run backend" "npm run ai-service"
 
+[2] 
+[2] > react-oas-integration@3.0.0 ai-service
+[2] > cd ai-service && python -m uvicorn main_simple:app --host 0.0.0.0 --port 8000 --reload
+[2] 
 [1] 
 [1] > react-oas-integration@3.0.0 backend
 [1] > cd backend && npm start
@@ -10,10 +14,6 @@
 [0] > react-oas-integration@3.0.0 start
 [0] > react-scripts start
 [0] 
-[2] 
-[2] > react-oas-integration@3.0.0 ai-service
-[2] > cd ai-service && python -m uvicorn main_simple:app --host 0.0.0.0 --port 8000 --reload
-[2] 
 [2] sh: python: command not found
 [2] npm run ai-service exited with code 127
 [1] 
@@ -28,7 +28,7 @@
 [1]     at Server.setupListenHandle [as _listen2] (node:net:1939:16)
 [1]     at listenInCluster (node:net:1996:12)
 [1]     at Server.listen (node:net:2101:7)
-[1]     at Object.<anonymous> (/Users/phuccao/Documents/GitHub/React-OAS-Integration-v4.0/backend/server.js:399:8)
+[1]     at Object.<anonymous> (/Users/phuccao/Documents/GitHub/React-OAS-Integration-v4.0/backend/server.js:553:8)
 [1]     at Module._compile (node:internal/modules/cjs/loader:1730:14)
 [1]     at Object..js (node:internal/modules/cjs/loader:1895:10)
 [1]     at Module.load (node:internal/modules/cjs/loader:1465:32)
