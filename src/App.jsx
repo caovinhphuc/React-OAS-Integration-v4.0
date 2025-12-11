@@ -1,3 +1,5 @@
+import { App as AntApp, ConfigProvider, theme } from "antd";
+import viVN from "antd/locale/vi_VN";
 import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import {
@@ -6,15 +8,13 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { ConfigProvider, theme, App as AntApp } from "antd";
-import viVN from "antd/locale/vi_VN";
-import "./global.css"; /* ✅ Import global styles first */
 import "./App.css";
 import Loading from "./components/Common/Loading";
-import Layout from "./components/layout/Layout";
-import { store } from "./store/store";
-import { BRAND_CONFIG } from "./config/brand";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Layout from "./components/layout/Layout";
+import { BRAND_CONFIG } from "./config/brand";
+import "./global.css"; /* ✅ Import global styles first */
+import { store } from "./store/store";
 
 // Enhanced lazy loading with preloading strategy
 const LiveDashboard = lazy(() =>
@@ -205,122 +205,135 @@ function App() {
         >
           <AntApp>
             <div className="App">
-              <Layout>
-                <Suspense fallback={<Loading />}>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/" element={<Home />} />
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  {/* Public Routes - No Layout */}
+                  <Route path="/login" element={<Login />} />
 
-                    {/* Protected Routes - Yêu cầu authentication */}
-                    <Route
-                      path="/dashboard"
-                      element={
-                        <ProtectedRoute>
-                          <LiveDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/ai-analytics"
-                      element={
-                        <ProtectedRoute>
-                          <AIDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/retail"
-                      element={
-                        <ProtectedRoute>
-                          <MIARetailDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/google-sheets"
-                      element={
-                        <ProtectedRoute>
-                          <GoogleSheetsIntegration />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/google-drive"
-                      element={
-                        <ProtectedRoute>
-                          <GoogleDriveIntegration />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/google-apps-script"
-                      element={
-                        <ProtectedRoute>
-                          <GoogleAppsScriptIntegration />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/telegram"
-                      element={
-                        <ProtectedRoute>
-                          <TelegramIntegration />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/automation"
-                      element={
-                        <ProtectedRoute>
-                          <AutomationDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/alerts"
-                      element={
-                        <ProtectedRoute>
-                          <AlertsManagement />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/advanced-analytics"
-                      element={
-                        <ProtectedRoute>
-                          <AdvancedAnalyticsDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/smart-automation"
-                      element={
-                        <ProtectedRoute>
-                          <SmartAutomationDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/nlp"
-                      element={
-                        <ProtectedRoute>
-                          <NLPDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/security"
-                      element={
-                        <ProtectedRoute>
-                          <SecurityDashboard />
-                        </ProtectedRoute>
-                      }
-                    />
+                  {/* Routes with Layout */}
+                  <Route
+                    path="/*"
+                    element={
+                      <Layout>
+                        <Routes>
+                          <Route path="/" element={<Home />} />
 
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Routes>
-                </Suspense>
-              </Layout>
+                          {/* Protected Routes - Yêu cầu authentication */}
+                          <Route
+                            path="/dashboard"
+                            element={
+                              <ProtectedRoute>
+                                <LiveDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/ai-analytics"
+                            element={
+                              <ProtectedRoute>
+                                <AIDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/retail"
+                            element={
+                              <ProtectedRoute>
+                                <MIARetailDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/google-sheets"
+                            element={
+                              <ProtectedRoute>
+                                <GoogleSheetsIntegration />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/google-drive"
+                            element={
+                              <ProtectedRoute>
+                                <GoogleDriveIntegration />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/google-apps-script"
+                            element={
+                              <ProtectedRoute>
+                                <GoogleAppsScriptIntegration />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/telegram"
+                            element={
+                              <ProtectedRoute>
+                                <TelegramIntegration />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/automation"
+                            element={
+                              <ProtectedRoute>
+                                <AutomationDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/alerts"
+                            element={
+                              <ProtectedRoute>
+                                <AlertsManagement />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/advanced-analytics"
+                            element={
+                              <ProtectedRoute>
+                                <AdvancedAnalyticsDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/smart-automation"
+                            element={
+                              <ProtectedRoute>
+                                <SmartAutomationDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/nlp"
+                            element={
+                              <ProtectedRoute>
+                                <NLPDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route
+                            path="/security"
+                            element={
+                              <ProtectedRoute>
+                                <SecurityDashboard />
+                              </ProtectedRoute>
+                            }
+                          />
+
+                          <Route
+                            path="*"
+                            element={<Navigate to="/" replace />}
+                          />
+                        </Routes>
+                      </Layout>
+                    }
+                  />
+                </Routes>
+              </Suspense>
             </div>
           </AntApp>
         </Router>

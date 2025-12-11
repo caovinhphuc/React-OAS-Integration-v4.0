@@ -238,7 +238,7 @@ app.post("/api/auth/logout", async (req, res) => {
 // Get all reports
 app.get("/api/reports", (req, res) => {
   const { timeframe = "7d", type = "all" } = req.query;
-  
+
   res.json({
     success: true,
     data: {
@@ -303,7 +303,7 @@ app.get("/api/reports", (req, res) => {
 // Get specific report by ID
 app.get("/api/reports/:id", (req, res) => {
   const { id } = req.params;
-  
+
   res.json({
     success: true,
     data: {
@@ -321,20 +321,20 @@ app.get("/api/reports/:id", (req, res) => {
           avgOrderValue: 230000,
         },
         charts: [
-          { 
-            type: "line", 
+          {
+            type: "line",
             title: "Revenue Trend",
-            data: [100, 120, 135, 142, 158, 175, 190] 
+            data: [100, 120, 135, 142, 158, 175, 190],
           },
-          { 
-            type: "bar", 
+          {
+            type: "bar",
             title: "Sales by Category",
-            data: [100, 200, 150, 300, 250] 
+            data: [100, 200, 150, 300, 250],
           },
-          { 
-            type: "pie", 
+          {
+            type: "pie",
             title: "Customer Distribution",
-            data: [30, 25, 20, 15, 10] 
+            data: [30, 25, 20, 15, 10],
           },
         ],
         insights: [
@@ -352,7 +352,7 @@ app.get("/api/reports/:id", (req, res) => {
 // Generate new report
 app.post("/api/reports/generate", (req, res) => {
   const { reportType = "general", timeframe = "7d", options = {} } = req.body;
-  
+
   res.json({
     success: true,
     message: "Báo cáo đang được tạo",
@@ -372,7 +372,7 @@ app.post("/api/reports/generate", (req, res) => {
 // Get report generation status
 app.get("/api/reports/status/:reportId", (req, res) => {
   const { reportId } = req.params;
-  
+
   res.json({
     success: true,
     data: {
@@ -530,6 +530,533 @@ app.get("/api/retail/stores", (req, res) => {
       ],
     },
   });
+});
+
+// ============================================
+// Google Drive API Endpoints
+// ============================================
+
+// List files in Google Drive
+app.get("/api/drive/files", async (req, res) => {
+  try {
+    const { folderId, pageSize = 10 } = req.query;
+
+    // Mock data for now - in production, integrate with Google Drive API
+    const mockFiles = [
+      {
+        id: "file_1",
+        name: "Document 1.pdf",
+        mimeType: "application/pdf",
+        size: 1024000,
+        modifiedTime: new Date().toISOString(),
+        createdTime: new Date().toISOString(),
+        webViewLink: "https://drive.google.com/file/d/file_1/view",
+      },
+      {
+        id: "folder_1",
+        name: "My Folder",
+        mimeType: "application/vnd.google-apps.folder",
+        modifiedTime: new Date().toISOString(),
+        createdTime: new Date().toISOString(),
+        webViewLink: "https://drive.google.com/drive/folders/folder_1",
+      },
+      {
+        id: "file_2",
+        name: "Spreadsheet 1.xlsx",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        size: 512000,
+        modifiedTime: new Date().toISOString(),
+        createdTime: new Date().toISOString(),
+        webViewLink: "https://drive.google.com/file/d/file_2/view",
+      },
+    ];
+
+    res.json({
+      success: true,
+      data: mockFiles,
+      nextPageToken: null,
+    });
+  } catch (error) {
+    console.error("Error listing Drive files:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi tải danh sách files từ Drive",
+    });
+  }
+});
+
+// Get file metadata
+app.get("/api/drive/files/:fileId", async (req, res) => {
+  try {
+    const { fileId } = req.params;
+
+    // Mock data
+    const mockFile = {
+      id: fileId,
+      name: "Document 1.pdf",
+      mimeType: "application/pdf",
+      size: 1024000,
+      modifiedTime: new Date().toISOString(),
+      createdTime: new Date().toISOString(),
+      webViewLink: `https://drive.google.com/file/d/${fileId}/view`,
+      owners: [{ displayName: "Admin User", emailAddress: "admin@mia.vn" }],
+    };
+
+    res.json({
+      success: true,
+      data: mockFile,
+    });
+  } catch (error) {
+    console.error("Error getting file metadata:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi lấy thông tin file",
+    });
+  }
+});
+
+// Upload file to Drive
+app.post("/api/drive/upload", async (req, res) => {
+  try {
+    // Mock upload response
+    const mockUploadedFile = {
+      id: `file_${Date.now()}`,
+      name: "Uploaded File",
+      mimeType: "application/octet-stream",
+      size: 1024,
+      webViewLink: "https://drive.google.com/file/d/new_file/view",
+    };
+
+    res.json({
+      success: true,
+      data: mockUploadedFile,
+      message: "File uploaded successfully",
+    });
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi upload file",
+    });
+  }
+});
+
+// Create folder
+app.post("/api/drive/folders", async (req, res) => {
+  try {
+    const { folderName, parentFolderId } = req.body;
+
+    // Mock folder creation
+    const mockFolder = {
+      id: `folder_${Date.now()}`,
+      name: folderName,
+      mimeType: "application/vnd.google-apps.folder",
+      webViewLink: "https://drive.google.com/drive/folders/new_folder",
+    };
+
+    res.json({
+      success: true,
+      data: mockFolder,
+      message: "Folder created successfully",
+    });
+  } catch (error) {
+    console.error("Error creating folder:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi tạo folder",
+    });
+  }
+});
+
+// Delete file
+app.delete("/api/drive/files/:fileId", async (req, res) => {
+  try {
+    const { fileId } = req.params;
+
+    res.json({
+      success: true,
+      message: "File deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting file:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi xóa file",
+    });
+  }
+});
+
+// Share file
+app.post("/api/drive/files/:fileId/share", async (req, res) => {
+  try {
+    const { fileId } = req.params;
+    const { email, role } = req.body;
+
+    res.json({
+      success: true,
+      message: `File shared with ${email} as ${role}`,
+    });
+  } catch (error) {
+    console.error("Error sharing file:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi chia sẻ file",
+    });
+  }
+});
+
+// Rename file
+app.put("/api/drive/files/:fileId/rename", async (req, res) => {
+  try {
+    const { fileId } = req.params;
+    const { name } = req.body;
+
+    res.json({
+      success: true,
+      data: { id: fileId, name },
+      message: "File renamed successfully",
+    });
+  } catch (error) {
+    console.error("Error renaming file:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi đổi tên file",
+    });
+  }
+});
+
+// Download file
+app.get("/api/drive/files/:fileId/download", async (req, res) => {
+  try {
+    const { fileId } = req.params;
+
+    // Mock download - in production, stream from Google Drive
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="file_${fileId}.pdf"`
+    );
+    res.setHeader("Content-Type", "application/pdf");
+    res.send(Buffer.from("Mock file content"));
+  } catch (error) {
+    console.error("Error downloading file:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi tải file",
+    });
+  }
+});
+
+// ============================================
+// Google Sheets API Endpoints
+// ============================================
+
+// Read data from sheet
+app.get("/api/sheets/read", async (req, res) => {
+  try {
+    const { range = "A1:Z1000", sheetId } = req.query;
+
+    // Mock spreadsheet data
+    const mockData = [
+      ["Name", "Email", "Phone", "Status"],
+      ["John Doe", "john@example.com", "123-456-7890", "Active"],
+      ["Jane Smith", "jane@example.com", "098-765-4321", "Active"],
+      ["Bob Johnson", "bob@example.com", "555-123-4567", "Inactive"],
+      ["Alice Williams", "alice@example.com", "444-555-6666", "Active"],
+    ];
+
+    res.json({
+      success: true,
+      data: mockData,
+      range: range,
+      majorDimension: "ROWS",
+    });
+  } catch (error) {
+    console.error("Error reading sheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi đọc dữ liệu từ sheet",
+    });
+  }
+});
+
+// Write data to sheet
+app.post("/api/sheets/write", async (req, res) => {
+  try {
+    const { range, values, sheetId } = req.body;
+
+    res.json({
+      success: true,
+      data: {
+        updatedRange: range,
+        updatedRows: values.length,
+        updatedColumns: values[0]?.length || 0,
+        updatedCells: values.length * (values[0]?.length || 0),
+      },
+      message: "Dữ liệu đã được ghi thành công",
+    });
+  } catch (error) {
+    console.error("Error writing to sheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi ghi dữ liệu vào sheet",
+    });
+  }
+});
+
+// Append data to sheet
+app.post("/api/sheets/append", async (req, res) => {
+  try {
+    const { range, values, sheetId } = req.body;
+
+    res.json({
+      success: true,
+      data: {
+        updates: {
+          spreadsheetId: sheetId || "default_sheet",
+          updatedRange: range,
+          updatedRows: values.length,
+          updatedColumns: values[0]?.length || 0,
+          updatedCells: values.length * (values[0]?.length || 0),
+        },
+      },
+      message: "Dữ liệu đã được thêm thành công",
+    });
+  } catch (error) {
+    console.error("Error appending to sheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi thêm dữ liệu vào sheet",
+    });
+  }
+});
+
+// Get sheet metadata
+app.get("/api/sheets/metadata/:sheetId?", async (req, res) => {
+  try {
+    const { sheetId } = req.params;
+
+    const mockMetadata = {
+      spreadsheetId: sheetId || "default_sheet_id",
+      properties: {
+        title: "Sample Spreadsheet",
+        locale: "vi_VN",
+        autoRecalc: "ON_CHANGE",
+        timeZone: "Asia/Ho_Chi_Minh",
+      },
+      sheets: [
+        {
+          properties: {
+            sheetId: 0,
+            title: "Sheet1",
+            index: 0,
+            sheetType: "GRID",
+            gridProperties: {
+              rowCount: 1000,
+              columnCount: 26,
+            },
+          },
+        },
+        {
+          properties: {
+            sheetId: 1,
+            title: "Sheet2",
+            index: 1,
+            sheetType: "GRID",
+            gridProperties: {
+              rowCount: 1000,
+              columnCount: 26,
+            },
+          },
+        },
+      ],
+      spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${
+        sheetId || "default_sheet_id"
+      }/edit`,
+    };
+
+    res.json({
+      success: true,
+      data: mockMetadata,
+    });
+  } catch (error) {
+    console.error("Error getting sheet metadata:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi lấy metadata của sheet",
+    });
+  }
+});
+
+// Clear sheet data
+app.delete("/api/sheets/clear", async (req, res) => {
+  try {
+    const { range, sheetId } = req.body;
+
+    res.json({
+      success: true,
+      data: {
+        clearedRange: range,
+        spreadsheetId: sheetId || "default_sheet",
+      },
+      message: "Dữ liệu đã được xóa thành công",
+    });
+  } catch (error) {
+    console.error("Error clearing sheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi xóa dữ liệu sheet",
+    });
+  }
+});
+
+// Add new worksheet to spreadsheet
+app.post("/api/sheets/add-sheet", async (req, res) => {
+  try {
+    const { sheetName, sheetId } = req.body;
+
+    const newSheet = {
+      properties: {
+        sheetId: Date.now(),
+        title: sheetName || "New Sheet",
+        index: 2,
+        sheetType: "GRID",
+        gridProperties: {
+          rowCount: 1000,
+          columnCount: 26,
+        },
+      },
+    };
+
+    res.json({
+      success: true,
+      data: newSheet,
+      message: `Sheet "${sheetName}" đã được tạo thành công`,
+    });
+  } catch (error) {
+    console.error("Error adding sheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi thêm sheet mới",
+    });
+  }
+});
+
+// Get spreadsheet data (for compatibility)
+app.get("/api/sheets/:spreadsheetId", async (req, res) => {
+  try {
+    const { spreadsheetId } = req.params;
+    const { range } = req.query;
+
+    // Mock spreadsheet data
+    const mockData = {
+      spreadsheetId,
+      properties: {
+        title: "Sample Spreadsheet",
+      },
+      sheets: [
+        {
+          properties: {
+            sheetId: 0,
+            title: "Sheet1",
+            index: 0,
+            gridProperties: {
+              rowCount: 1000,
+              columnCount: 26,
+            },
+          },
+        },
+      ],
+      values: [
+        ["Name", "Email", "Phone", "Status"],
+        ["John Doe", "john@example.com", "123-456-7890", "Active"],
+        ["Jane Smith", "jane@example.com", "098-765-4321", "Active"],
+        ["Bob Johnson", "bob@example.com", "555-123-4567", "Inactive"],
+      ],
+    };
+
+    res.json({
+      success: true,
+      data: mockData,
+    });
+  } catch (error) {
+    console.error("Error getting spreadsheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi lấy dữ liệu spreadsheet",
+    });
+  }
+});
+
+// Update spreadsheet data
+app.put("/api/sheets/:spreadsheetId", async (req, res) => {
+  try {
+    const { spreadsheetId } = req.params;
+    const { range, values } = req.body;
+
+    res.json({
+      success: true,
+      message: "Spreadsheet updated successfully",
+      updatedCells: values.length,
+    });
+  } catch (error) {
+    console.error("Error updating spreadsheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi cập nhật spreadsheet",
+    });
+  }
+});
+
+// Append data to spreadsheet (alternative endpoint)
+app.post("/api/sheets/:spreadsheetId/append", async (req, res) => {
+  try {
+    const { spreadsheetId } = req.params;
+    const { range, values } = req.body;
+
+    res.json({
+      success: true,
+      message: "Data appended successfully",
+      updates: {
+        spreadsheetId,
+        updatedRange: range,
+        updatedRows: values.length,
+      },
+    });
+  } catch (error) {
+    console.error("Error appending to spreadsheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi thêm dữ liệu vào spreadsheet",
+    });
+  }
+});
+
+// Create new spreadsheet
+app.post("/api/sheets/create", async (req, res) => {
+  try {
+    const { title, sheets } = req.body;
+
+    const mockSpreadsheet = {
+      spreadsheetId: `sheet_${Date.now()}`,
+      properties: {
+        title: title || "New Spreadsheet",
+      },
+      spreadsheetUrl: "https://docs.google.com/spreadsheets/d/new_sheet/edit",
+    };
+
+    res.json({
+      success: true,
+      data: mockSpreadsheet,
+      message: "Spreadsheet created successfully",
+    });
+  } catch (error) {
+    console.error("Error creating spreadsheet:", error);
+    res.status(500).json({
+      success: false,
+      error: "Lỗi khi tạo spreadsheet",
+    });
+  }
 });
 
 // ============================================

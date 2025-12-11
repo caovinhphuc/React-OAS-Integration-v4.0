@@ -9,16 +9,22 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "socket.io": "^4.7.2",
     "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "googleapis": "^168.0.0",
     "helmet": "^7.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["react", "oas", "websocket", "backend"],
+  "keywords": [
+    "react",
+    "oas",
+    "websocket",
+    "backend"
+  ],
   "author": "React OAS Team",
   "license": "MIT"
 }

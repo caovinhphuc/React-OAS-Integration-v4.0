@@ -1,27 +1,26 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import {
-  Card,
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Alert,
-  Space,
-  Divider,
-  Typography,
-} from "antd";
-import {
-  UserOutlined,
-  LockOutlined,
-  GoogleOutlined,
   GithubOutlined,
+  GoogleOutlined,
+  LockOutlined,
+  UserOutlined,
   WindowsOutlined,
 } from "@ant-design/icons";
-import { App } from "antd";
+import {
+  Alert,
+  App,
+  Button,
+  Card,
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  Space,
+  Typography,
+} from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { loginUser, registerUser } from "../../services/securityService";
-import securityService from "../../services/securityService";
 import Loading from "../Common/Loading";
 import "./Auth.css";
 
@@ -63,7 +62,7 @@ const Login = () => {
           values.email,
           values.password,
           values.fullName,
-          "user",
+          "user"
         );
         message.success("Đăng ký thành công! Vui lòng đăng nhập.");
         setIsRegister(false);
@@ -123,7 +122,7 @@ const Login = () => {
         } else {
           // No token or user in response
           throw new Error(
-            "Đăng nhập thất bại: Không nhận được thông tin người dùng",
+            "Đăng nhập thất bại: Không nhận được thông tin người dùng"
           );
         }
       }
@@ -138,13 +137,17 @@ const Login = () => {
   const handleSSOLogin = async (provider) => {
     setSsoLoading(provider);
     try {
-      const authData = await securityService.getSSOAuthUrl(provider);
-      if (authData?.authUrl) {
-        window.location.href = authData.authUrl;
-      } else {
-        message.error(`Không thể lấy URL xác thực từ ${provider}`);
-        setSsoLoading(null);
-      }
+      // SSO not implemented yet - show info message
+      message.info(
+        `Đăng nhập ${provider} sẽ được triển khai trong phiên bản tiếp theo`
+      );
+      setSsoLoading(null);
+
+      // TODO: Implement SSO when backend is ready
+      // const authData = await securityService.getSSOAuthUrl(provider);
+      // if (authData?.authUrl) {
+      //   window.location.href = authData.authUrl;
+      // }
     } catch (error) {
       message.error(`Lỗi đăng nhập ${provider}: ${error.message}`);
       setSsoLoading(null);
@@ -268,7 +271,7 @@ const Login = () => {
                           return Promise.resolve();
                         }
                         return Promise.reject(
-                          new Error("Mật khẩu xác nhận không khớp!"),
+                          new Error("Mật khẩu xác nhận không khớp!")
                         );
                       },
                     }),

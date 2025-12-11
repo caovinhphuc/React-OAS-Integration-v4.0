@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Main Bundle",
+    "path": "build/static/js/main.*.js",
+    "limit": "500 KB",
+    "webpack": false
+  },
+  {
+    "name": "All JS",
+    "path": "build/static/js/*.js",
+    "limit": "2 MB",
+    "webpack": false
+  },
+  {
+    "name": "CSS",
+    "path": "build/static/css/*.css",
+    "limit": "200 KB",
+    "webpack": false
+  }
+]

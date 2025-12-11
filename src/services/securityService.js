@@ -99,7 +99,7 @@ export const registerUser = async (
   email,
   password,
   fullName = "",
-  role = "user",
+  role = "user"
 ) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
@@ -145,7 +145,7 @@ const retryFetch = async (url, options, maxRetries = 2, delay = 1000) => {
       }
       // Exponential backoff
       await new Promise((resolve) =>
-        setTimeout(resolve, delay * Math.pow(2, attempt)),
+        setTimeout(resolve, delay * Math.pow(2, attempt))
       );
     }
   }
@@ -168,7 +168,7 @@ export const loginUser = async (email, password, mfaToken = null) => {
         body: JSON.stringify({ email, password, mfaToken }),
       },
       2,
-      1000,
+      1000
     ); // 2 retries, 1s initial delay
 
     const responseTime = performance.now() - startTime;
@@ -217,7 +217,7 @@ export const loginUser = async (email, password, mfaToken = null) => {
     } catch (parseError) {
       console.error("Failed to parse JSON response:", parseError);
       throw new Error(
-        "Phản hồi không hợp lệ từ server. Vui lòng kiểm tra backend API.",
+        "Phản hồi không hợp lệ từ server. Vui lòng kiểm tra backend API."
       );
     }
 
@@ -230,13 +230,13 @@ export const loginUser = async (email, password, mfaToken = null) => {
       return { requiresMFA: true, message: data.message };
     }
 
-    // Backend returns: { success, user, session, message }
+    // Backend returns: { success, user, session, token, message }
     // Parse response correctly
     const userData = data.user || {};
     const sessionData = data.session || {};
 
-    // Generate token from session_id if no token provided
-    const token = sessionData.session_id || `token_${Date.now()}`;
+    // Use token from backend response (NOT session_id)
+    const token = data.token || `token_${Date.now()}`;
 
     // Set token
     setAuthToken(token);
@@ -258,7 +258,7 @@ export const loginUser = async (email, password, mfaToken = null) => {
     // Provide more helpful error message
     if (error.name === "AbortError") {
       throw new Error(
-        "Yêu cầu quá thời gian. Vui lòng kiểm tra kết nối mạng và thử lại.",
+        "Yêu cầu quá thời gian. Vui lòng kiểm tra kết nối mạng và thử lại."
       );
     }
     if (
@@ -266,7 +266,7 @@ export const loginUser = async (email, password, mfaToken = null) => {
       error.message.includes("NetworkError")
     ) {
       throw new Error(
-        "Không thể kết nối đến server. Vui lòng kiểm tra REACT_APP_API_URL hoặc đảm bảo backend API đang chạy.",
+        "Không thể kết nối đến server. Vui lòng kiểm tra REACT_APP_API_URL hoặc đảm bảo backend API đang chạy."
       );
     }
     throw error;
@@ -292,7 +292,7 @@ export const logoutUser = async (sessionId = null, logoutAll = false) => {
         // Even if API call fails, continue with local cleanup
         console.warn(
           "Logout API call failed, but continuing with local cleanup:",
-          apiError,
+          apiError
         );
       }
     }
@@ -337,7 +337,7 @@ export const generateMFASecret = async () => {
       `${API_BASE_URL}/api/auth/mfa/generate`,
       {
         method: "POST",
-      },
+      }
     );
     return data.data;
   } catch (error) {
@@ -356,7 +356,7 @@ export const enableMFA = async (token) => {
       {
         method: "POST",
         body: JSON.stringify({ token }),
-      },
+      }
     );
     return data;
   } catch (error) {
@@ -374,7 +374,7 @@ export const disableMFA = async () => {
       `${API_BASE_URL}/api/auth/mfa/disable`,
       {
         method: "POST",
-      },
+      }
     );
     return data;
   } catch (error) {
@@ -415,7 +415,7 @@ export const handleSSOCallback = async (provider, code, state) => {
       `${API_BASE_URL}/api/auth/sso/${provider}/callback?code=${code}&state=${state}`,
       {
         method: "GET",
-      },
+      }
     );
 
     const data = await response.json();
@@ -457,7 +457,7 @@ export const getAllUsers = async () => {
 export const getUserById = async (userId) => {
   try {
     const data = await authenticatedFetch(
-      `${API_BASE_URL}/api/auth/users/${userId}`,
+      `${API_BASE_URL}/api/auth/users/${userId}`
     );
     return data.data;
   } catch (error) {
@@ -476,7 +476,7 @@ export const updateUserRole = async (userId, role) => {
       {
         method: "PUT",
         body: JSON.stringify({ role }),
-      },
+      }
     );
     return data.data;
   } catch (error) {
@@ -494,7 +494,7 @@ export const deleteUser = async (userId) => {
       `${API_BASE_URL}/api/auth/users/${userId}`,
       {
         method: "DELETE",
-      },
+      }
     );
     return data;
   } catch (error) {
@@ -518,7 +518,7 @@ export const queryAuditLogs = async (filters = {}) => {
     });
 
     const data = await authenticatedFetch(
-      `${API_BASE_URL}/api/audit/logs?${queryParams.toString()}`,
+      `${API_BASE_URL}/api/audit/logs?${queryParams.toString()}`
     );
     return data.data;
   } catch (error) {
@@ -540,7 +540,7 @@ export const getAuditStatistics = async (filters = {}) => {
     });
 
     const data = await authenticatedFetch(
-      `${API_BASE_URL}/api/audit/statistics?${queryParams.toString()}`,
+      `${API_BASE_URL}/api/audit/statistics?${queryParams.toString()}`
     );
     return data.data;
   } catch (error) {
@@ -559,7 +559,7 @@ export const generateComplianceReport = async (startDate, endDate) => {
       {
         method: "POST",
         body: JSON.stringify({ startDate, endDate }),
-      },
+      }
     );
     return data.data;
   } catch (error) {

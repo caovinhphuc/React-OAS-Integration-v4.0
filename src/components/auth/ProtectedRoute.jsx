@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { message } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 import { logout } from "../../store/actions/authActions";
 import Loading from "../Common/Loading";
 
@@ -112,7 +112,7 @@ const ProtectedRoute = ({ children }) => {
                   // Ignore logout errors
                 }
                 message.warning(
-                  "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+                  "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."
                 );
               }
             } else if (response.status === 401) {
@@ -125,10 +125,10 @@ const ProtectedRoute = ({ children }) => {
                 // Ignore logout errors
               }
               message.warning(
-                "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+                "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."
               );
             } else {
-              // Other error
+              // Other error - don't show message, just set invalid
               setIsValid(false);
               try {
                 await dispatch(logout(false));
@@ -150,9 +150,7 @@ const ProtectedRoute = ({ children }) => {
               } catch (e) {
                 // Ignore logout errors
               }
-              message.warning(
-                "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
-              );
+              // Don't show warning message here - let the redirect handle it
             } else {
               // Network error, cho phép truy cập (có thể backend chưa chạy)
               setIsValid(true);
@@ -172,12 +170,9 @@ const ProtectedRoute = ({ children }) => {
     checkSession();
 
     // Kiểm tra session định kỳ mỗi 5 phút
-    const interval = setInterval(
-      () => {
-        checkSession();
-      },
-      5 * 60 * 1000,
-    ); // 5 minutes
+    const interval = setInterval(() => {
+      checkSession();
+    }, 5 * 60 * 1000); // 5 minutes
 
     return () => clearInterval(interval);
   }, [isAuthenticated, sessionId, dispatch]);

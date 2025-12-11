@@ -1,10 +1,20 @@
 /* ========================================
-   MIA.vn Google Integration - Global CSS
+   MIA.vn Google Integration - Global CSS v4.0
+   Modern Design System with Design Tokens
    ======================================== */
 
+/* Import Design System */
+@import './styles/design-tokens.css';
+@import './styles/animations.css';
+@import './styles/typography.css';
+
 /* CSS Reset & Base Styles */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -12,13 +22,14 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #1e293b;
-  background: #f8fafc;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-gray-900);
+  background: var(--color-gray-50);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ========================================
