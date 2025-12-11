@@ -1,1 +1,6 @@
-/Users/phuccao/Documents/GitHub/React-OAS-Integration-v4.0/ai-venv/bin/python3: No module named uvicorn
+INFO:     Started server process [86993]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.

@@ -1,6 +1,5 @@
-[dotenv@17.2.2] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
-🚀 Server running on port 3003
+[dotenv@17.2.2] injecting env (0) from .env -- tip: 📡 version env with Radar: https://dotenvx.com/radar
+🚀 Server running on port 3001
 📊 Google Sheets: Not configured
 📧 Email: Not configured
 📱 Telegram: Not configured
-User logged in: demo@mia.vn at 2025-09-27T13:23:00.802Z
