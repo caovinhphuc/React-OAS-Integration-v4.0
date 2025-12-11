@@ -4,8 +4,12 @@
   "description": "Backend WebSocket Server for React OAS Integration",
   "main": "server.js",
   "scripts": {
+    "build": "npm install && npm run dev",
+    "build:prod": "npm install && npm run dev",
     "start": "node server.js",
+    "start:prod": "node server.js",
     "dev": "nodemon server.js",
+    "dev:prod": "nodemon server.js",
     "test": "node test.js"
   },
   "dependencies": {

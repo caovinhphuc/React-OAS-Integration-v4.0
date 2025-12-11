@@ -1,6 +1,6 @@
 # 📊 Bundle Optimization Report
 
-**Generated:** 09:13:49 11/12/2025
+**Generated:** 11:12:05 11/12/2025
 
 ## 📦 Bundle Sizes
 
@@ -14,21 +14,21 @@
 ## 📁 Top Largest Files
 
 ```
-1. bundle-stats.json - 134.69 MB
-2. static/js/main.c25a975b.js.map - 2.83 MB
-3. static/js/119.6e711040.chunk.js.map - 1.55 MB
-4. static/js/598.635cd680.chunk.js.map - 718.23 KB
-5. static/js/main.c25a975b.js - 675.07 KB
-6. static/js/512.e2439796.chunk.js.map - 533.51 KB
-7. static/js/443.944232e3.chunk.js.map - 519.59 KB
-8. static/js/138.f2b61a74.chunk.js.map - 454.44 KB
-9. static/js/119.6e711040.chunk.js - 373.27 KB
-10. static/js/131.6e8db8e0.chunk.js.map - 368.53 KB
-11. static/js/37.ea055602.chunk.js.map - 350.78 KB
-12. static/js/576.77c49862.chunk.js.map - 215.33 KB
-13. static/js/403.3f1f9693.chunk.js.map - 175.7 KB
-14. static/js/598.635cd680.chunk.js - 165.52 KB
-15. static/js/645.23ee9d4a.chunk.js.map - 142.75 KB
+1. static/js/main.e9be80a9.js.map - 2.83 MB
+2. static/js/119.6e711040.chunk.js.map - 1.55 MB
+3. static/js/598.635cd680.chunk.js.map - 718.23 KB
+4. static/js/main.e9be80a9.js - 675.07 KB
+5. static/js/512.e2439796.chunk.js.map - 533.51 KB
+6. static/js/443.944232e3.chunk.js.map - 519.59 KB
+7. static/js/138.f2b61a74.chunk.js.map - 454.44 KB
+8. static/js/119.6e711040.chunk.js - 373.27 KB
+9. static/js/131.6e8db8e0.chunk.js.map - 368.53 KB
+10. static/js/37.ea055602.chunk.js.map - 350.78 KB
+11. static/js/576.77c49862.chunk.js.map - 215.33 KB
+12. static/js/403.3f1f9693.chunk.js.map - 175.7 KB
+13. static/js/598.635cd680.chunk.js - 165.52 KB
+14. static/js/645.23ee9d4a.chunk.js.map - 142.75 KB
+15. static/js/137.8b4bb879.chunk.js.map - 138.64 KB
 ```
 
 ## 💡 Recommendations

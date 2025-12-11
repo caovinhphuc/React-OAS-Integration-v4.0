@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-12-11T03:54:15.900Z",
+  "overall": "unhealthy",
+  "services": {
+    "file-system": {
+      "status": "error",
+      "message": "Missing files/directories: .env, src/App.jsx",
+      "details": null,
+      "timestamp": "2025-12-11T03:54:15.901Z"
+    },
+    "dependencies": {
+      "status": "warning",
+      "message": "Missing critical dependencies: google-auth-library",
+      "details": null,
+      "timestamp": "2025-12-11T03:54:15.901Z"
+    },
+    "environment": {
+      "status": "error",
+      "message": "Missing required environment variables: GOOGLE_SERVICE_ACCOUNT_EMAIL, REACT_APP_GOOGLE_SHEETS_SPREADSHEET_ID",
+      "details": null,
+      "timestamp": "2025-12-11T03:54:15.901Z"
+    }
+  },
+  "errors": [
+    {
+      "service": "file-system",
+      "message": "Missing files/directories: .env, src/App.jsx",
+      "details": null
+    },
+    {
+      "service": "environment",
+      "message": "Missing required environment variables: GOOGLE_SERVICE_ACCOUNT_EMAIL, REACT_APP_GOOGLE_SHEETS_SPREADSHEET_ID",
+      "details": null
+    }
+  ],
+  "warnings": [
+    {
+      "service": "dependencies",
+      "message": "Missing critical dependencies: google-auth-library",
+      "details": null
+    }
+  ]
+}
