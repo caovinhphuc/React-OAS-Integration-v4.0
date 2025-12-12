@@ -7,22 +7,22 @@
  * Bao gồm: cài đặt dependencies, cấu hình environment, test kết nối
  */
 
-const fs = require("fs");
-const path = require("path");
-const { execSync } = require("child_process");
-const readline = require("readline");
+const fs = require('fs')
+const path = require('path')
+const { execSync } = require('child_process')
+const readline = require('readline')
 
 // Colors for console output
 const colors = {
-  reset: "\x1b[0m",
-  bright: "\x1b[1m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-};
+  reset: '\x1b[0m',
+  bright: '\x1b[1m',
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+}
 
 // Console logging functions
 const log = {
@@ -31,52 +31,49 @@ const log = {
   warning: (msg) => console.log(`${colors.yellow}⚠️  ${msg}${colors.reset}`),
   error: (msg) => console.log(`${colors.red}❌ ${msg}${colors.reset}`),
   step: (msg) => console.log(`${colors.cyan}🚀 ${msg}${colors.reset}`),
-  header: (msg) =>
-    console.log(`\n${colors.bright}${colors.magenta}${msg}${colors.reset}\n`),
-};
+  header: (msg) => console.log(`\n${colors.bright}${colors.magenta}${msg}${colors.reset}\n`),
+}
 
 // Create readline interface for user input
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-});
+})
 
 // Utility functions
 const execCommand = (command, options = {}) => {
   try {
     const result = execSync(command, {
-      stdio: "pipe",
-      encoding: "utf8",
+      stdio: 'pipe',
+      encoding: 'utf8',
       ...options,
-    });
-    return { success: true, output: result };
+    })
+    return { success: true, output: result }
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, error: error.message }
   }
-};
+}
 
 const askQuestion = (question) => {
   return new Promise((resolve) => {
     rl.question(question, (answer) => {
-      resolve(answer.trim());
-    });
-  });
-};
+      resolve(answer.trim())
+    })
+  })
+}
 
 const fileExists = (filePath) => {
-  return fs.existsSync(path.resolve(filePath));
-};
+  return fs.existsSync(path.resolve(filePath))
+}
 
 const createEnvFile = async () => {
-  log.step("Tạo file .env từ template...");
+  log.step('Tạo file .env từ template...')
 
-  if (fileExists(".env")) {
-    const overwrite = await askQuestion(
-      "File .env đã tồn tại. Bạn có muốn ghi đè? (y/N): "
-    );
-    if (overwrite.toLowerCase() !== "y") {
-      log.info("Bỏ qua tạo file .env");
-      return;
+  if (fileExists('.env')) {
+    const overwrite = await askQuestion('File .env đã tồn tại. Bạn có muốn ghi đè? (y/N): ')
+    if (overwrite.toLowerCase() !== 'y') {
+      log.info('Bỏ qua tạo file .env')
+      return
     }
   }
 
@@ -116,135 +113,127 @@ WEB_PUSH_PRIVATE_KEY=
 WEB_PUSH_VAPID_SUBJECT=mailto:admin@mia.vn
 
 VITE_GOOGLE_APPS_SCRIPT_URL=https://script.google.com/macros/s/your_script_id/dev
-`;
+`
 
   try {
-    fs.writeFileSync(".env", envTemplate);
-    log.success("Đã tạo file .env thành công");
+    fs.writeFileSync('.env', envTemplate)
+    log.success('Đã tạo file .env thành công')
   } catch (error) {
-    log.error(`Lỗi khi tạo file .env: ${error.message}`);
+    log.error(`Lỗi khi tạo file .env: ${error.message}`)
   }
-};
+}
 
 const installDependencies = async () => {
-  log.step("Cài đặt dependencies...");
+  log.step('Cài đặt dependencies...')
 
   // Check if package.json exists
-  if (!fileExists("package.json")) {
-    log.error(
-      "Không tìm thấy package.json. Vui lòng chạy script trong thư mục gốc của dự án."
-    );
-    return false;
+  if (!fileExists('package.json')) {
+    log.error('Không tìm thấy package.json. Vui lòng chạy script trong thư mục gốc của dự án.')
+    return false
   }
 
   // Install frontend dependencies
-  log.info("Cài đặt frontend dependencies...");
-  const frontendResult = execCommand("npm install");
+  log.info('Cài đặt frontend dependencies...')
+  const frontendResult = execCommand('npm install')
   if (!frontendResult.success) {
-    log.error(`Lỗi cài đặt frontend dependencies: ${frontendResult.error}`);
-    return false;
+    log.error(`Lỗi cài đặt frontend dependencies: ${frontendResult.error}`)
+    return false
   }
-  log.success("Frontend dependencies đã được cài đặt");
+  log.success('Frontend dependencies đã được cài đặt')
 
   // Install backend dependencies
-  log.info("Cài đặt backend dependencies...");
-  const backendResult = execCommand(
-    "npm install express nodemailer node-cron cors dotenv"
-  );
+  log.info('Cài đặt backend dependencies...')
+  const backendResult = execCommand('npm install express nodemailer node-cron cors dotenv')
   if (!backendResult.success) {
-    log.error(`Lỗi cài đặt backend dependencies: ${backendResult.error}`);
-    return false;
+    log.error(`Lỗi cài đặt backend dependencies: ${backendResult.error}`)
+    return false
   }
-  log.success("Backend dependencies đã được cài đặt");
+  log.success('Backend dependencies đã được cài đặt')
 
-  return true;
-};
+  return true
+}
 
 const validateEnvironment = () => {
-  log.step("Kiểm tra cấu hình environment...");
+  log.step('Kiểm tra cấu hình environment...')
 
-  if (!fileExists(".env")) {
-    log.error("File .env không tồn tại. Vui lòng tạo file .env trước.");
-    return false;
+  if (!fileExists('.env')) {
+    log.error('File .env không tồn tại. Vui lòng tạo file .env trước.')
+    return false
   }
 
   // Read .env file
-  const envContent = fs.readFileSync(".env", "utf8");
+  const envContent = fs.readFileSync('.env', 'utf8')
 
   // Check for required variables
   const requiredVars = [
-    "GOOGLE_SERVICE_ACCOUNT_EMAIL",
-    "GOOGLE_PRIVATE_KEY",
-    "REACT_APP_GOOGLE_SHEETS_SPREADSHEET_ID",
-  ];
+    'GOOGLE_SERVICE_ACCOUNT_EMAIL',
+    'GOOGLE_PRIVATE_KEY',
+    'REACT_APP_GOOGLE_SHEETS_SPREADSHEET_ID',
+  ]
 
   const missingVars = requiredVars.filter((varName) => {
-    const regex = new RegExp(`^${varName}=`, "m");
-    return (
-      !regex.test(envContent) || envContent.match(regex)[0].includes("your-")
-    );
-  });
+    const regex = new RegExp(`^${varName}=`, 'm')
+    return !regex.test(envContent) || envContent.match(regex)[0].includes('your-')
+  })
 
   if (missingVars.length > 0) {
-    log.warning(
-      `Các biến môi trường sau chưa được cấu hình: ${missingVars.join(", ")}`
-    );
-    log.info("Vui lòng cập nhật file .env với thông tin thực tế của bạn.");
-    return false;
+    log.warning(`Các biến môi trường sau chưa được cấu hình: ${missingVars.join(', ')}`)
+    log.info('Vui lòng cập nhật file .env với thông tin thực tế của bạn.')
+    return false
   }
 
-  log.success("Environment configuration hợp lệ");
-  return true;
-};
+  log.success('Environment configuration hợp lệ')
+  return true
+}
 
 const testGoogleConnection = async () => {
-  log.step("Test kết nối Google APIs...");
+  log.step('Test kết nối Google APIs...')
 
-  if (!fileExists("scripts/testGoogleConnection.js")) {
-    log.warning("Script test Google connection không tồn tại");
-    return false;
+  if (!fileExists('scripts/testGoogleConnection.js')) {
+    log.warning('Script test Google connection không tồn tại')
+    return false
   }
 
-  const testResult = execCommand("node scripts/testGoogleConnection.js");
+  const testResult = execCommand('node scripts/testGoogleConnection.js')
   if (testResult.success) {
-    log.success("Kết nối Google APIs thành công");
-    return true;
+    log.success('Kết nối Google APIs thành công')
+    return true
   } else {
-    log.error(`Test kết nối Google APIs thất bại: ${testResult.error}`);
-    return false;
+    log.error(`Test kết nối Google APIs thất bại: ${testResult.error}`)
+    return false
   }
-};
+}
 
 const createProjectStructure = () => {
-  log.step("Tạo cấu trúc thư mục dự án...");
+  log.step('Tạo cấu trúc thư mục dự án...')
 
   const directories = [
-    "src/components/Common",
-    "src/components/GoogleSheet",
-    "src/components/GoogleDrive",
-    "src/components/Dashboard",
-    "src/components/Alerts",
-    "src/services",
-    "src/hooks",
-    "src/config",
-    "src/utils",
-    "src/constants",
-    "scripts",
-  ];
+    'src/components/Common',
+    'src/components/GoogleSheet',
+    'src/components/GoogleDrive',
+    'src/components/Dashboard',
+    'src/components/Alerts',
+    'src/services',
+    'src/hooks',
+    'src/config',
+    'src/utils',
+    'src/constants',
+    'scripts',
+  ]
 
   directories.forEach((dir) => {
-    const dirPath = path.resolve(dir);
+    const dirPath = path.resolve(dir)
     if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-      log.info(`Đã tạo thư mục: ${dir}`);
+      fs.mkdirSync(dirPath, { recursive: true })
+      log.info(`Đã tạo thư mục: ${dir}`)
     }
-  });
+  })
 
-  log.success("Cấu trúc thư mục đã được tạo");
-};
+  log.success('Cấu trúc thư mục đã được tạo')
+}
 
 const showNextSteps = () => {
-  log.header("🎉 SETUP HOÀN THÀNH!");
+  log.header('🎉 SETUP HOÀN THÀNH!')
 
   console.log(`
 ${colors.green}Dự án React Google Integration đã được setup thành công!${colors.reset}
@@ -278,59 +267,57 @@ ${colors.cyan}📚 Tài liệu hữu ích:${colors.reset}
 - Deployment Guide: doc/deployment/DEPLOYMENT_GUIDE.md
 
 ${colors.green}Chúc bạn phát triển ứng dụng thành công! 🚀${colors.reset}
-  `);
-};
+  `)
+}
 
 const main = async () => {
-  log.header("🚀 REACT GOOGLE INTEGRATION - AUTOMATED SETUP");
+  log.header('🚀 REACT GOOGLE INTEGRATION - AUTOMATED SETUP')
 
   try {
     // Step 1: Create project structure
-    createProjectStructure();
+    createProjectStructure()
 
     // Step 2: Install dependencies
-    const depsInstalled = await installDependencies();
+    const depsInstalled = await installDependencies()
     if (!depsInstalled) {
-      log.error("Setup thất bại ở bước cài đặt dependencies");
-      process.exit(1);
+      log.error('Setup thất bại ở bước cài đặt dependencies')
+      process.exit(1)
     }
 
     // Step 3: Create .env file
-    await createEnvFile();
+    await createEnvFile()
 
     // Step 4: Validate environment (optional)
-    const envValid = validateEnvironment();
+    const envValid = validateEnvironment()
     if (!envValid) {
-      log.warning(
-        "Environment chưa được cấu hình đầy đủ. Vui lòng cập nhật file .env"
-      );
+      log.warning('Environment chưa được cấu hình đầy đủ. Vui lòng cập nhật file .env')
     }
 
     // Step 5: Test Google connection (if env is valid)
     if (envValid) {
-      await testGoogleConnection();
+      await testGoogleConnection()
     }
 
     // Step 6: Show next steps
-    showNextSteps();
+    showNextSteps()
   } catch (error) {
-    log.error(`Setup thất bại: ${error.message}`);
-    process.exit(1);
+    log.error(`Setup thất bại: ${error.message}`)
+    process.exit(1)
   } finally {
-    rl.close();
+    rl.close()
   }
-};
+}
 
 // Handle process termination
-process.on("SIGINT", () => {
-  log.warning("\nSetup bị hủy bởi người dùng");
-  rl.close();
-  process.exit(0);
-});
+process.on('SIGINT', () => {
+  log.warning('\nSetup bị hủy bởi người dùng')
+  rl.close()
+  process.exit(0)
+})
 
 // Run main function
 if (require.main === module) {
-  main();
+  main()
 }
 
 module.exports = {
@@ -339,4 +326,4 @@ module.exports = {
   validateEnvironment,
   testGoogleConnection,
   createProjectStructure,
-};
+}

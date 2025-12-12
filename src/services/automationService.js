@@ -4,9 +4,7 @@
  */
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_URL ||
-  process.env.VITE_API_URL ||
-  "http://localhost:3001";
+  process.env.REACT_APP_API_URL || process.env.VITE_API_URL || 'http://localhost:3001'
 
 class AutomationService {
   /**
@@ -14,15 +12,15 @@ class AutomationService {
    */
   async listAutomations() {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/automation`);
+      const response = await fetch(`${API_BASE_URL}/api/automation`)
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to list automations");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to list automations')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error listing automations:", error);
-      throw error;
+      console.error('Error listing automations:', error)
+      throw error
     }
   }
 
@@ -31,15 +29,15 @@ class AutomationService {
    */
   async getAutomation(id) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/automation/${id}`);
+      const response = await fetch(`${API_BASE_URL}/api/automation/${id}`)
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to get automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to get automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error getting automation:", error);
-      throw error;
+      console.error('Error getting automation:', error)
+      throw error
     }
   }
 
@@ -49,20 +47,20 @@ class AutomationService {
   async createAutomation(automation) {
     try {
       const response = await fetch(`${API_BASE_URL}/api/automation`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(automation),
-      });
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to create automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error creating automation:", error);
-      throw error;
+      console.error('Error creating automation:', error)
+      throw error
     }
   }
 
@@ -72,20 +70,20 @@ class AutomationService {
   async updateAutomation(id, updates) {
     try {
       const response = await fetch(`${API_BASE_URL}/api/automation/${id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updates),
-      });
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to update automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to update automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error updating automation:", error);
-      throw error;
+      console.error('Error updating automation:', error)
+      throw error
     }
   }
 
@@ -95,16 +93,16 @@ class AutomationService {
   async deleteAutomation(id) {
     try {
       const response = await fetch(`${API_BASE_URL}/api/automation/${id}`, {
-        method: "DELETE",
-      });
+        method: 'DELETE',
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to delete automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to delete automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error deleting automation:", error);
-      throw error;
+      console.error('Error deleting automation:', error)
+      throw error
     }
   }
 
@@ -113,20 +111,17 @@ class AutomationService {
    */
   async toggleAutomation(id) {
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/automation/${id}/toggle`,
-        {
-          method: "POST",
-        },
-      );
+      const response = await fetch(`${API_BASE_URL}/api/automation/${id}/toggle`, {
+        method: 'POST',
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to toggle automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to toggle automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error toggling automation:", error);
-      throw error;
+      console.error('Error toggling automation:', error)
+      throw error
     }
   }
 
@@ -135,20 +130,17 @@ class AutomationService {
    */
   async executeAutomation(id) {
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/automation/${id}/execute`,
-        {
-          method: "POST",
-        },
-      );
+      const response = await fetch(`${API_BASE_URL}/api/automation/${id}/execute`, {
+        method: 'POST',
+      })
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to execute automation");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to execute automation')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error executing automation:", error);
-      throw error;
+      console.error('Error executing automation:', error)
+      throw error
     }
   }
 
@@ -157,15 +149,15 @@ class AutomationService {
    */
   async getAutomationLogs(id) {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/automation/${id}/logs`);
+      const response = await fetch(`${API_BASE_URL}/api/automation/${id}/logs`)
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to get logs");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to get logs')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error getting logs:", error);
-      throw error;
+      console.error('Error getting logs:', error)
+      throw error
     }
   }
 
@@ -174,18 +166,18 @@ class AutomationService {
    */
   async getAllLogs() {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/automation/logs/all`);
+      const response = await fetch(`${API_BASE_URL}/api/automation/logs/all`)
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to get logs");
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to get logs')
       }
-      return await response.json();
+      return await response.json()
     } catch (error) {
-      console.error("Error getting all logs:", error);
-      throw error;
+      console.error('Error getting all logs:', error)
+      throw error
     }
   }
 }
 
-export const automationService = new AutomationService();
-export default automationService;
+export const automationService = new AutomationService()
+export default automationService

@@ -1,48 +1,48 @@
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const cors = require("cors");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const path = require("path");
+const express = require('express')
+const http = require('http')
+const socketIo = require('socket.io')
+const cors = require('cors')
+const helmet = require('helmet')
+const morgan = require('morgan')
+const path = require('path')
 
-const app = express();
-const server = http.createServer(app);
+const app = express()
+const server = http.createServer(app)
 const io = socketIo(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: '*',
+    methods: ['GET', 'POST'],
   },
-});
+})
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
 
 // Middleware
-app.use(helmet());
-app.use(cors());
-app.use(morgan("combined"));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(helmet())
+app.use(cors())
+app.use(morgan('combined'))
+app.use(express.json())
+app.use(express.static(path.join(__dirname, '../build')))
 
 // Health check endpoint
-app.get("/health", (req, res) => {
+app.get('/health', (req, res) => {
   res.json({
-    status: "OK",
-    message: "Backend server is running",
+    status: 'OK',
+    message: 'Backend server is running',
     timestamp: new Date().toISOString(),
     port: PORT,
-  });
-});
+  })
+})
 
 // API Routes
-app.get("/api/status", (req, res) => {
+app.get('/api/status', (req, res) => {
   res.json({
-    service: "React OAS Backend",
-    version: "3.0",
-    status: "operational",
+    service: 'React OAS Backend',
+    version: '3.0',
+    status: 'operational',
     uptime: process.uptime(),
-  });
-});
+  })
+})
 
 // ============================================
 // Authentication Endpoints
@@ -51,61 +51,55 @@ app.get("/api/status", (req, res) => {
 // Mock user database (in production, use proper database)
 const users = [
   {
-    email: "admin@mia.vn",
-    password: "admin123", // In production, use hashed passwords
-    fullName: "Admin User",
-    role: "admin",
-    permissions: ["*"],
+    email: 'admin@mia.vn',
+    password: 'admin123', // In production, use hashed passwords
+    fullName: 'Admin User',
+    role: 'admin',
+    permissions: ['*'],
   },
   {
-    email: "user@mia.vn",
-    password: "user123",
-    fullName: "Regular User",
-    role: "user",
-    permissions: ["read"],
+    email: 'user@mia.vn',
+    password: 'user123',
+    fullName: 'Regular User',
+    role: 'user',
+    permissions: ['read'],
   },
-];
+]
 
 // Login endpoint
-app.post("/api/auth/login", async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   try {
-    const { email, password, mfaToken } = req.body;
+    const { email, password, mfaToken } = req.body
 
     // Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        error: "Email và mật khẩu là bắt buộc",
-      });
+        error: 'Email và mật khẩu là bắt buộc',
+      })
     }
 
     // Find user
-    const user = users.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase()
-    );
+    const user = users.find((u) => u.email.toLowerCase() === email.toLowerCase())
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: "Email hoặc mật khẩu không đúng",
-      });
+        error: 'Email hoặc mật khẩu không đúng',
+      })
     }
 
     // Check password (in production, use bcrypt to compare hashed passwords)
     if (user.password !== password) {
       return res.status(401).json({
         success: false,
-        error: "Email hoặc mật khẩu không đúng",
-      });
+        error: 'Email hoặc mật khẩu không đúng',
+      })
     }
 
     // Generate token
-    const token = `token_${Date.now()}_${Math.random()
-      .toString(36)
-      .substring(2)}`;
-    const sessionId = `session_${Date.now()}_${Math.random()
-      .toString(36)
-      .substring(2)}`;
+    const token = `token_${Date.now()}_${Math.random().toString(36).substring(2)}`
+    const sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2)}`
 
     // Create user object (without password)
     const userObj = {
@@ -113,17 +107,17 @@ app.post("/api/auth/login", async (req, res) => {
       fullName: user.fullName,
       role: user.role,
       permissions: user.permissions,
-      id: user.email.replace("@", "_").replace(".", "_"),
-    };
+      id: user.email.replace('@', '_').replace('.', '_'),
+    }
 
     // Create session object
     const session = {
       session_id: sessionId,
       user_id: userObj.id,
       expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
-    };
+    }
 
-    console.log(`✅ User logged in: ${email} at ${new Date().toISOString()}`);
+    console.log(`✅ User logged in: ${email} at ${new Date().toISOString()}`)
 
     // Return success response
     res.json({
@@ -131,113 +125,113 @@ app.post("/api/auth/login", async (req, res) => {
       user: userObj,
       session: session,
       token: token,
-      message: "Đăng nhập thành công",
-    });
+      message: 'Đăng nhập thành công',
+    })
   } catch (error) {
-    console.error("Login error:", error);
+    console.error('Login error:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi server khi xử lý đăng nhập",
-    });
+      error: 'Lỗi server khi xử lý đăng nhập',
+    })
   }
-});
+})
 
 // Verify session/token endpoint (support both GET and POST)
-app.get("/api/auth/verify", async (req, res) => {
+app.get('/api/auth/verify', async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+    const authHeader = req.headers.authorization
+    const token = authHeader && authHeader.split(' ')[1] // Bearer TOKEN
 
     if (!token) {
       return res.status(401).json({
         success: false,
-        error: "Token không được cung cấp",
-      });
+        error: 'Token không được cung cấp',
+      })
     }
 
     // In production, verify JWT token
     // For now, just check if token format is valid
-    if (token.startsWith("token_")) {
+    if (token.startsWith('token_')) {
       res.json({
         success: true,
         valid: true,
-        message: "Token hợp lệ",
-      });
+        message: 'Token hợp lệ',
+      })
     } else {
       res.status(401).json({
         success: false,
-        error: "Token không hợp lệ",
-      });
+        error: 'Token không hợp lệ',
+      })
     }
   } catch (error) {
-    console.error("Verify error:", error);
+    console.error('Verify error:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi server khi xác minh token",
-    });
+      error: 'Lỗi server khi xác minh token',
+    })
   }
-});
+})
 
-app.post("/api/auth/verify", async (req, res) => {
+app.post('/api/auth/verify', async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+    const authHeader = req.headers.authorization
+    const token = authHeader && authHeader.split(' ')[1] // Bearer TOKEN
 
     if (!token) {
       return res.status(401).json({
         success: false,
-        error: "Token không được cung cấp",
-      });
+        error: 'Token không được cung cấp',
+      })
     }
 
     // In production, verify JWT token
     // For now, just check if token format is valid
-    if (token.startsWith("token_")) {
+    if (token.startsWith('token_')) {
       res.json({
         success: true,
         valid: true,
-        message: "Token hợp lệ",
-      });
+        message: 'Token hợp lệ',
+      })
     } else {
       res.status(401).json({
         success: false,
-        error: "Token không hợp lệ",
-      });
+        error: 'Token không hợp lệ',
+      })
     }
   } catch (error) {
-    console.error("Verify error:", error);
+    console.error('Verify error:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi server khi xác minh token",
-    });
+      error: 'Lỗi server khi xác minh token',
+    })
   }
-});
+})
 
 // Logout endpoint
-app.post("/api/auth/logout", async (req, res) => {
+app.post('/api/auth/logout', async (req, res) => {
   try {
     // In production, invalidate session/token in database
-    console.log("User logged out");
+    console.log('User logged out')
     res.json({
       success: true,
-      message: "Đăng xuất thành công",
-    });
+      message: 'Đăng xuất thành công',
+    })
   } catch (error) {
-    console.error("Logout error:", error);
+    console.error('Logout error:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi server khi đăng xuất",
-    });
+      error: 'Lỗi server khi đăng xuất',
+    })
   }
-});
+})
 
 // ============================================
 // Reports Endpoints
 // ============================================
 
 // Get all reports
-app.get("/api/reports", (req, res) => {
-  const { timeframe = "7d", type = "all" } = req.query;
+app.get('/api/reports', (req, res) => {
+  const { timeframe = '7d', type = 'all' } = req.query
 
   res.json({
     success: true,
@@ -247,20 +241,20 @@ app.get("/api/reports", (req, res) => {
       reports: [
         {
           id: 1,
-          title: "Sales Performance Report",
-          type: "sales",
+          title: 'Sales Performance Report',
+          type: 'sales',
           date: new Date().toISOString(),
           summary: {
-            totalSales: 1250000,
+            totalSales: 9999999,
             growth: 12.5,
-            topProduct: "Product A",
-            currency: "VND",
+            topProduct: 'Product A',
+            currency: 'VND',
           },
         },
         {
           id: 2,
-          title: "Customer Analytics Report",
-          type: "analytics",
+          title: 'Customer Analytics Report',
+          type: 'analytics',
           date: new Date().toISOString(),
           summary: {
             totalCustomers: 5420,
@@ -271,8 +265,8 @@ app.get("/api/reports", (req, res) => {
         },
         {
           id: 3,
-          title: "Inventory Status Report",
-          type: "inventory",
+          title: 'Inventory Status Report',
+          type: 'inventory',
           date: new Date().toISOString(),
           summary: {
             totalItems: 1250,
@@ -283,8 +277,8 @@ app.get("/api/reports", (req, res) => {
         },
         {
           id: 4,
-          title: "Financial Summary Report",
-          type: "financial",
+          title: 'Financial Summary Report',
+          type: 'financial',
           date: new Date().toISOString(),
           summary: {
             revenue: 2500000000,
@@ -297,22 +291,22 @@ app.get("/api/reports", (req, res) => {
       generated_at: new Date().toISOString(),
       total_reports: 4,
     },
-  });
-});
+  })
+})
 
 // Get specific report by ID
-app.get("/api/reports/:id", (req, res) => {
-  const { id } = req.params;
+app.get('/api/reports/:id', (req, res) => {
+  const { id } = req.params
 
   res.json({
     success: true,
     data: {
       id: parseInt(id),
       title: `Detailed Report #${id}`,
-      type: "detailed",
+      type: 'detailed',
       created_at: new Date().toISOString(),
       content: {
-        summary: "Chi tiết báo cáo đầy đủ",
+        summary: 'Chi tiết báo cáo đầy đủ',
         metrics: {
           revenue: 1250000000,
           customers: 5420,
@@ -322,97 +316,97 @@ app.get("/api/reports/:id", (req, res) => {
         },
         charts: [
           {
-            type: "line",
-            title: "Revenue Trend",
+            type: 'line',
+            title: 'Revenue Trend',
             data: [100, 120, 135, 142, 158, 175, 190],
           },
           {
-            type: "bar",
-            title: "Sales by Category",
+            type: 'bar',
+            title: 'Sales by Category',
             data: [100, 200, 150, 300, 250],
           },
           {
-            type: "pie",
-            title: "Customer Distribution",
+            type: 'pie',
+            title: 'Customer Distribution',
             data: [30, 25, 20, 15, 10],
           },
         ],
         insights: [
-          "Doanh thu tăng 12.5% so với tháng trước",
-          "Sản phẩm A là best seller với 450 đơn hàng",
-          "Khách hàng mới tăng 15% trong tuần qua",
-          "Tỷ lệ giữ chân khách hàng đạt 78.5%",
+          'Doanh thu tăng 12.5% so với tháng trước',
+          'Sản phẩm A là best seller với 450 đơn hàng',
+          'Khách hàng mới tăng 15% trong tuần qua',
+          'Tỷ lệ giữ chân khách hàng đạt 78.5%',
         ],
       },
       generated_at: new Date().toISOString(),
     },
-  });
-});
+  })
+})
 
 // Generate new report
-app.post("/api/reports/generate", (req, res) => {
-  const { reportType = "general", timeframe = "7d", options = {} } = req.body;
+app.post('/api/reports/generate', (req, res) => {
+  const { reportType = 'general', timeframe = '7d', options = {} } = req.body
 
   res.json({
     success: true,
-    message: "Báo cáo đang được tạo",
+    message: 'Báo cáo đang được tạo',
     data: {
       reportId: Date.now(),
-      status: "processing",
-      estimatedTime: "2-3 phút",
+      status: 'processing',
+      estimatedTime: '2-3 phút',
       reportType,
       timeframe,
       options,
       progress: 0,
       created_at: new Date().toISOString(),
     },
-  });
-});
+  })
+})
 
 // Get report generation status
-app.get("/api/reports/status/:reportId", (req, res) => {
-  const { reportId } = req.params;
+app.get('/api/reports/status/:reportId', (req, res) => {
+  const { reportId } = req.params
 
   res.json({
     success: true,
     data: {
       reportId: parseInt(reportId),
-      status: "completed",
+      status: 'completed',
       progress: 100,
       downloadUrl: `/api/reports/download/${reportId}`,
       completed_at: new Date().toISOString(),
     },
-  });
-});
+  })
+})
 
 // WebSocket connection handling
-io.on("connection", (socket) => {
-  console.log(`Client connected: ${socket.id}`);
+io.on('connection', (socket) => {
+  console.log(`Client connected: ${socket.id}`)
 
   // Send welcome message
-  socket.emit("welcome", {
-    message: "Connected to React OAS Backend",
+  socket.emit('welcome', {
+    message: 'Connected to React OAS Backend',
     timestamp: new Date().toISOString(),
-  });
+  })
 
   // Handle real-time data requests
-  socket.on("request_data", (data) => {
-    console.log("Data request received:", data);
+  socket.on('request_data', (data) => {
+    console.log('Data request received:', data)
 
     // Simulate real-time data
     const mockData = {
       id: Date.now(),
       timestamp: new Date().toISOString(),
       value: Math.random() * 100,
-      status: "active",
-    };
+      status: 'active',
+    }
 
-    socket.emit("data_update", mockData);
-  });
+    socket.emit('data_update', mockData)
+  })
 
   // Handle AI analytics requests
-  socket.on("ai_analysis", (data) => {
-    console.log("AI analysis request:", data);
+  socket.on('ai_analysis', (data) => {
+    console.log('AI analysis request:', data)
 
     // Simulate AI processing
     setTimeout(() => {
@@ -421,42 +415,47 @@ io.on("connection", (socket) => {
         prediction: Math.random() * 100,
         confidence: Math.random(),
         timestamp: new Date().toISOString(),
-        analysis: "AI analysis completed",
-      };
+        analysis: 'AI analysis completed',
+      }
 
-      socket.emit("ai_result", aiResult);
-    }, 1000);
-  });
+      socket.emit('ai_result', aiResult)
+    }, 1000)
+  })
 
-  socket.on("disconnect", () => {
-    console.log(`Client disconnected: ${socket.id}`);
-  });
-});
+  socket.on('disconnect', () => {
+    console.log(`Client disconnected: ${socket.id}`)
+  })
+})
 
 // ============================================
 // Retail/Dashboard API Endpoints
 // ============================================
 
 // Retail Dashboard
-app.get("/api/retail/dashboard", (req, res) => {
+app.get('/api/retail/dashboard', (req, res) => {
   res.json({
     success: true,
     data: {
-      totalSales: 1250000,
+      today: {
+        revenue: 9999999,
+        orders: 342,
+        aov: 3654, // nếu UI có dùng AOV
+      },
+      totalSales: 9999999,
       totalOrders: 342,
       averageOrderValue: 3654,
       conversionRate: 3.2,
       topProducts: [
-        { name: "Product A", sales: 45000, quantity: 120 },
-        { name: "Product B", sales: 38000, quantity: 95 },
+        { name: 'Product A', sales: 45000, quantity: 120 },
+        { name: 'Product B', sales: 38000, quantity: 95 },
       ],
     },
-  });
-});
+  })
+})
 
 // Sales Metrics
-app.get("/api/retail/sales", (req, res) => {
-  const timeframe = req.query.timeframe || "7d";
+app.get('/api/retail/sales', (req, res) => {
+  const timeframe = req.query.timeframe || '7d'
   res.json({
     success: true,
     data: {
@@ -464,16 +463,16 @@ app.get("/api/retail/sales", (req, res) => {
       totalSales: 1250000,
       growth: 12.5,
       metrics: [
-        { date: "2025-11-19", sales: 180000 },
-        { date: "2025-11-20", sales: 195000 },
-        { date: "2025-11-21", sales: 210000 },
+        { date: '2025-11-19', sales: 180000 },
+        { date: '2025-11-20', sales: 195000 },
+        { date: '2025-11-21', sales: 210000 },
       ],
     },
-  });
-});
+  })
+})
 
 // Inventory Status
-app.get("/api/retail/inventory", (req, res) => {
+app.get('/api/retail/inventory', (req, res) => {
   res.json({
     success: true,
     data: {
@@ -481,16 +480,16 @@ app.get("/api/retail/inventory", (req, res) => {
       lowStock: 45,
       outOfStock: 12,
       categories: [
-        { name: "Electronics", count: 450, lowStock: 15 },
-        { name: "Clothing", count: 320, lowStock: 8 },
+        { name: 'Electronics', count: 450, lowStock: 15 },
+        { name: 'Clothing', count: 320, lowStock: 8 },
       ],
     },
-  });
-});
+  })
+})
 
 // Customer Analytics
-app.get("/api/retail/customers", (req, res) => {
-  const timeframe = req.query.timeframe || "7d";
+app.get('/api/retail/customers', (req, res) => {
+  const timeframe = req.query.timeframe || '7d'
   res.json({
     success: true,
     data: {
@@ -499,291 +498,287 @@ app.get("/api/retail/customers", (req, res) => {
       newCustomers: 85,
       activeCustomers: 450,
       segments: [
-        { segment: "VIP", count: 120, revenue: 450000 },
-        { segment: "Regular", count: 880, revenue: 650000 },
+        { segment: 'VIP', count: 120, revenue: 450000 },
+        { segment: 'Regular', count: 880, revenue: 650000 },
       ],
     },
-  });
-});
+  })
+})
 
 // Products
-app.get("/api/retail/products", (req, res) => {
+app.get('/api/retail/products', (req, res) => {
   res.json({
     success: true,
     data: {
       products: [
-        { id: 1, name: "Product A", price: 99, stock: 45 },
-        { id: 2, name: "Product B", price: 149, stock: 28 },
+        { id: 1, name: 'Product A', price: 99, stock: 45 },
+        { id: 2, name: 'Product B', price: 149, stock: 28 },
       ],
     },
-  });
-});
+  })
+})
 
 // Stores
-app.get("/api/retail/stores", (req, res) => {
+app.get('/api/retail/stores', (req, res) => {
   res.json({
     success: true,
     data: {
       stores: [
-        { id: 1, name: "Store A", location: "City A", sales: 450000 },
-        { id: 2, name: "Store B", location: "City B", sales: 380000 },
+        { id: 1, name: 'Store A', location: 'City A', sales: 450000 },
+        { id: 2, name: 'Store B', location: 'City B', sales: 380000 },
       ],
     },
-  });
-});
+  })
+})
 
 // ============================================
 // Google Drive API Endpoints
 // ============================================
 
 // List files in Google Drive
-app.get("/api/drive/files", async (req, res) => {
+app.get('/api/drive/files', async (req, res) => {
   try {
-    const { folderId, pageSize = 10 } = req.query;
+    const { folderId, pageSize = 10 } = req.query
 
     // Mock data for now - in production, integrate with Google Drive API
     const mockFiles = [
       {
-        id: "file_1",
-        name: "Document 1.pdf",
-        mimeType: "application/pdf",
+        id: 'file_1',
+        name: 'Document 1.pdf',
+        mimeType: 'application/pdf',
         size: 1024000,
         modifiedTime: new Date().toISOString(),
         createdTime: new Date().toISOString(),
-        webViewLink: "https://drive.google.com/file/d/file_1/view",
+        webViewLink: 'https://drive.google.com/file/d/file_1/view',
       },
       {
-        id: "folder_1",
-        name: "My Folder",
-        mimeType: "application/vnd.google-apps.folder",
+        id: 'folder_1',
+        name: 'My Folder',
+        mimeType: 'application/vnd.google-apps.folder',
         modifiedTime: new Date().toISOString(),
         createdTime: new Date().toISOString(),
-        webViewLink: "https://drive.google.com/drive/folders/folder_1",
+        webViewLink: 'https://drive.google.com/drive/folders/folder_1',
       },
       {
-        id: "file_2",
-        name: "Spreadsheet 1.xlsx",
-        mimeType:
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        id: 'file_2',
+        name: 'Spreadsheet 1.xlsx',
+        mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         size: 512000,
         modifiedTime: new Date().toISOString(),
         createdTime: new Date().toISOString(),
-        webViewLink: "https://drive.google.com/file/d/file_2/view",
+        webViewLink: 'https://drive.google.com/file/d/file_2/view',
       },
-    ];
+    ]
 
     res.json({
-      success: true,
+      success: true,s
       data: mockFiles,
       nextPageToken: null,
-    });
+    })
   } catch (error) {
-    console.error("Error listing Drive files:", error);
+    console.error('Error listing Drive files:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi tải danh sách files từ Drive",
-    });
+      error: 'Lỗi khi tải danh sách files từ Drive',
+    })
   }
-});
+})
 
 // Get file metadata
-app.get("/api/drive/files/:fileId", async (req, res) => {
+app.get('/api/drive/files/:fileId', async (req, res) => {
   try {
-    const { fileId } = req.params;
+    const { fileId } = req.params
 
     // Mock data
     const mockFile = {
       id: fileId,
-      name: "Document 1.pdf",
-      mimeType: "application/pdf",
+      name: 'Document 1.pdf',
+      mimeType: 'application/pdf',
       size: 1024000,
       modifiedTime: new Date().toISOString(),
       createdTime: new Date().toISOString(),
       webViewLink: `https://drive.google.com/file/d/${fileId}/view`,
-      owners: [{ displayName: "Admin User", emailAddress: "admin@mia.vn" }],
-    };
+      owners: [{ displayName: 'Admin User', emailAddress: 'admin@mia.vn' }],
+    }
 
     res.json({
       success: true,
       data: mockFile,
-    });
+    })
   } catch (error) {
-    console.error("Error getting file metadata:", error);
+    console.error('Error getting file metadata:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi lấy thông tin file",
-    });
+      error: 'Lỗi khi lấy thông tin file',
+    })
   }
-});
+})
 
 // Upload file to Drive
-app.post("/api/drive/upload", async (req, res) => {
+app.post('/api/drive/upload', async (req, res) => {
   try {
     // Mock upload response
     const mockUploadedFile = {
       id: `file_${Date.now()}`,
-      name: "Uploaded File",
-      mimeType: "application/octet-stream",
+      name: 'Uploaded File',
+      mimeType: 'application/octet-stream',
       size: 1024,
-      webViewLink: "https://drive.google.com/file/d/new_file/view",
-    };
+      webViewLink: 'https://drive.google.com/file/d/new_file/view',
+    }
 
     res.json({
       success: true,
       data: mockUploadedFile,
-      message: "File uploaded successfully",
-    });
+      message: 'File uploaded successfully',
+    })
   } catch (error) {
-    console.error("Error uploading file:", error);
+    console.error('Error uploading file:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi upload file",
-    });
+      error: 'Lỗi khi upload file',
+    })
   }
-});
+})
 
 // Create folder
-app.post("/api/drive/folders", async (req, res) => {
+app.post('/api/drive/folders', async (req, res) => {
   try {
-    const { folderName, parentFolderId } = req.body;
+    const { folderName, parentFolderId } = req.body
 
     // Mock folder creation
     const mockFolder = {
       id: `folder_${Date.now()}`,
       name: folderName,
-      mimeType: "application/vnd.google-apps.folder",
-      webViewLink: "https://drive.google.com/drive/folders/new_folder",
-    };
+      mimeType: 'application/vnd.google-apps.folder',
+      webViewLink: 'https://drive.google.com/drive/folders/new_folder',
+    }
 
     res.json({
       success: true,
       data: mockFolder,
-      message: "Folder created successfully",
-    });
+      message: 'Folder created successfully',
+    })
   } catch (error) {
-    console.error("Error creating folder:", error);
+    console.error('Error creating folder:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi tạo folder",
-    });
+      error: 'Lỗi khi tạo folder',
+    })
   }
-});
+})
 
 // Delete file
-app.delete("/api/drive/files/:fileId", async (req, res) => {
+app.delete('/api/drive/files/:fileId', async (req, res) => {
   try {
-    const { fileId } = req.params;
+    const { fileId } = req.params
 
     res.json({
       success: true,
-      message: "File deleted successfully",
-    });
+      message: 'File deleted successfully',
+    })
   } catch (error) {
-    console.error("Error deleting file:", error);
+    console.error('Error deleting file:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi xóa file",
-    });
+      error: 'Lỗi khi xóa file',
+    })
   }
-});
+})
 
 // Share file
-app.post("/api/drive/files/:fileId/share", async (req, res) => {
+app.post('/api/drive/files/:fileId/share', async (req, res) => {
   try {
-    const { fileId } = req.params;
-    const { email, role } = req.body;
+    const { fileId } = req.params
+    const { email, role } = req.body
 
     res.json({
       success: true,
       message: `File shared with ${email} as ${role}`,
-    });
+    })
   } catch (error) {
-    console.error("Error sharing file:", error);
+    console.error('Error sharing file:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi chia sẻ file",
-    });
+      error: 'Lỗi khi chia sẻ file',
+    })
   }
-});
+})
 
 // Rename file
-app.put("/api/drive/files/:fileId/rename", async (req, res) => {
+app.put('/api/drive/files/:fileId/rename', async (req, res) => {
   try {
-    const { fileId } = req.params;
-    const { name } = req.body;
+    const { fileId } = req.params
+    const { name } = req.body
 
     res.json({
       success: true,
       data: { id: fileId, name },
-      message: "File renamed successfully",
-    });
+      message: 'File renamed successfully',
+    })
   } catch (error) {
-    console.error("Error renaming file:", error);
+    console.error('Error renaming file:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi đổi tên file",
-    });
+      error: 'Lỗi khi đổi tên file',
+    })
   }
-});
+})
 
 // Download file
-app.get("/api/drive/files/:fileId/download", async (req, res) => {
+app.get('/api/drive/files/:fileId/download', async (req, res) => {
   try {
-    const { fileId } = req.params;
+    const { fileId } = req.params
 
     // Mock download - in production, stream from Google Drive
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="file_${fileId}.pdf"`
-    );
-    res.setHeader("Content-Type", "application/pdf");
-    res.send(Buffer.from("Mock file content"));
+    res.setHeader('Content-Disposition', `attachment; filename="file_${fileId}.pdf"`)
+    res.setHeader('Content-Type', 'application/pdf')
+    res.send(Buffer.from('Mock file content'))
   } catch (error) {
-    console.error("Error downloading file:", error);
+    console.error('Error downloading file:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi tải file",
-    });
+      error: 'Lỗi khi tải file',
+    })
   }
-});
+})
 
 // ============================================
 // Google Sheets API Endpoints
 // ============================================
 
 // Read data from sheet
-app.get("/api/sheets/read", async (req, res) => {
+app.get('/api/sheets/read', async (req, res) => {
   try {
-    const { range = "A1:Z1000", sheetId } = req.query;
+    const { range = 'A1:Z1000', sheetId } = req.query
 
     // Mock spreadsheet data
     const mockData = [
-      ["Name", "Email", "Phone", "Status"],
-      ["John Doe", "john@example.com", "123-456-7890", "Active"],
-      ["Jane Smith", "jane@example.com", "098-765-4321", "Active"],
-      ["Bob Johnson", "bob@example.com", "555-123-4567", "Inactive"],
-      ["Alice Williams", "alice@example.com", "444-555-6666", "Active"],
-    ];
+      ['Name', 'Email', 'Phone', 'Status'],
+      ['John Doe', 'john@example.com', '123-456-7890', 'Active'],
+      ['Jane Smith', 'jane@example.com', '098-765-4321', 'Active'],
+      ['Bob Johnson', 'bob@example.com', '555-123-4567', 'Inactive'],
+      ['Alice Williams', 'alice@example.com', '444-555-6666', 'Active'],
+    ]
 
     res.json({
       success: true,
       data: mockData,
       range: range,
-      majorDimension: "ROWS",
-    });
+      majorDimension: 'ROWS',
+    })
   } catch (error) {
-    console.error("Error reading sheet:", error);
+    console.error('Error reading sheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi đọc dữ liệu từ sheet",
-    });
+      error: 'Lỗi khi đọc dữ liệu từ sheet',
+    })
   }
-});
+})
 
 // Write data to sheet
-app.post("/api/sheets/write", async (req, res) => {
+app.post('/api/sheets/write', async (req, res) => {
   try {
-    const { range, values, sheetId } = req.body;
+    const { range, values, sheetId } = req.body
 
     res.json({
       success: true,
@@ -793,64 +788,64 @@ app.post("/api/sheets/write", async (req, res) => {
         updatedColumns: values[0]?.length || 0,
         updatedCells: values.length * (values[0]?.length || 0),
       },
-      message: "Dữ liệu đã được ghi thành công",
-    });
+      message: 'Dữ liệu đã được ghi thành công',
+    })
   } catch (error) {
-    console.error("Error writing to sheet:", error);
+    console.error('Error writing to sheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi ghi dữ liệu vào sheet",
-    });
+      error: 'Lỗi khi ghi dữ liệu vào sheet',
+    })
   }
-});
+})
 
 // Append data to sheet
-app.post("/api/sheets/append", async (req, res) => {
+app.post('/api/sheets/append', async (req, res) => {
   try {
-    const { range, values, sheetId } = req.body;
+    const { range, values, sheetId } = req.body
 
     res.json({
       success: true,
       data: {
         updates: {
-          spreadsheetId: sheetId || "default_sheet",
+          spreadsheetId: sheetId || 'default_sheet',
           updatedRange: range,
           updatedRows: values.length,
           updatedColumns: values[0]?.length || 0,
           updatedCells: values.length * (values[0]?.length || 0),
         },
       },
-      message: "Dữ liệu đã được thêm thành công",
-    });
+      message: 'Dữ liệu đã được thêm thành công',
+    })
   } catch (error) {
-    console.error("Error appending to sheet:", error);
+    console.error('Error appending to sheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi thêm dữ liệu vào sheet",
-    });
+      error: 'Lỗi khi thêm dữ liệu vào sheet',
+    })
   }
-});
+})
 
 // Get sheet metadata
-app.get("/api/sheets/metadata/:sheetId?", async (req, res) => {
+app.get('/api/sheets/metadata/:sheetId?', async (req, res) => {
   try {
-    const { sheetId } = req.params;
+    const { sheetId } = req.params
 
     const mockMetadata = {
-      spreadsheetId: sheetId || "default_sheet_id",
+      spreadsheetId: sheetId || 'default_sheet_id',
       properties: {
-        title: "Sample Spreadsheet",
-        locale: "vi_VN",
-        autoRecalc: "ON_CHANGE",
-        timeZone: "Asia/Ho_Chi_Minh",
+        title: 'Sample Spreadsheet',
+        locale: 'vi_VN',
+        autoRecalc: 'ON_CHANGE',
+        timeZone: 'Asia/Ho_Chi_Minh',
       },
       sheets: [
         {
           properties: {
             sheetId: 0,
-            title: "Sheet1",
+            title: 'Sheet1',
             index: 0,
-            sheetType: "GRID",
+            sheetType: 'GRID',
             gridProperties: {
               rowCount: 1000,
               columnCount: 26,
@@ -860,9 +855,9 @@ app.get("/api/sheets/metadata/:sheetId?", async (req, res) => {
         {
           properties: {
             sheetId: 1,
-            title: "Sheet2",
+            title: 'Sheet2',
             index: 1,
-            sheetType: "GRID",
+            sheetType: 'GRID',
             gridProperties: {
               rowCount: 1000,
               columnCount: 26,
@@ -871,94 +866,94 @@ app.get("/api/sheets/metadata/:sheetId?", async (req, res) => {
         },
       ],
       spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${
-        sheetId || "default_sheet_id"
+        sheetId || 'default_sheet_id'
       }/edit`,
-    };
+    }
 
     res.json({
       success: true,
       data: mockMetadata,
-    });
+    })
   } catch (error) {
-    console.error("Error getting sheet metadata:", error);
+    console.error('Error getting sheet metadata:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi lấy metadata của sheet",
-    });
+      error: 'Lỗi khi lấy metadata của sheet',
+    })
   }
-});
+})
 
 // Clear sheet data
-app.delete("/api/sheets/clear", async (req, res) => {
+app.delete('/api/sheets/clear', async (req, res) => {
   try {
-    const { range, sheetId } = req.body;
+    const { range, sheetId } = req.body
 
     res.json({
       success: true,
       data: {
         clearedRange: range,
-        spreadsheetId: sheetId || "default_sheet",
+        spreadsheetId: sheetId || 'default_sheet',
       },
-      message: "Dữ liệu đã được xóa thành công",
-    });
+      message: 'Dữ liệu đã được xóa thành công',
+    })
   } catch (error) {
-    console.error("Error clearing sheet:", error);
+    console.error('Error clearing sheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi xóa dữ liệu sheet",
-    });
+      error: 'Lỗi khi xóa dữ liệu sheet',
+    })
   }
-});
+})
 
 // Add new worksheet to spreadsheet
-app.post("/api/sheets/add-sheet", async (req, res) => {
+app.post('/api/sheets/add-sheet', async (req, res) => {
   try {
-    const { sheetName, sheetId } = req.body;
+    const { sheetName, sheetId } = req.body
 
     const newSheet = {
       properties: {
         sheetId: Date.now(),
-        title: sheetName || "New Sheet",
+        title: sheetName || 'New Sheet',
         index: 2,
-        sheetType: "GRID",
+        sheetType: 'GRID',
         gridProperties: {
           rowCount: 1000,
           columnCount: 26,
         },
       },
-    };
+    }
 
     res.json({
       success: true,
       data: newSheet,
       message: `Sheet "${sheetName}" đã được tạo thành công`,
-    });
+    })
   } catch (error) {
-    console.error("Error adding sheet:", error);
+    console.error('Error adding sheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi thêm sheet mới",
-    });
+      error: 'Lỗi khi thêm sheet mới',
+    })
   }
-});
+})
 
 // Get spreadsheet data (for compatibility)
-app.get("/api/sheets/:spreadsheetId", async (req, res) => {
+app.get('/api/sheets/:spreadsheetId', async (req, res) => {
   try {
-    const { spreadsheetId } = req.params;
-    const { range } = req.query;
+    const { spreadsheetId } = req.params
+    const { range } = req.query
 
     // Mock spreadsheet data
     const mockData = {
       spreadsheetId,
       properties: {
-        title: "Sample Spreadsheet",
+        title: 'Sample Spreadsheet',
       },
       sheets: [
         {
           properties: {
             sheetId: 0,
-            title: "Sheet1",
+            title: 'Sheet1',
             index: 0,
             gridProperties: {
               rowCount: 1000,
@@ -968,125 +963,125 @@ app.get("/api/sheets/:spreadsheetId", async (req, res) => {
         },
       ],
       values: [
-        ["Name", "Email", "Phone", "Status"],
-        ["John Doe", "john@example.com", "123-456-7890", "Active"],
-        ["Jane Smith", "jane@example.com", "098-765-4321", "Active"],
-        ["Bob Johnson", "bob@example.com", "555-123-4567", "Inactive"],
+        ['Name', 'Email', 'Phone', 'Status'],
+        ['John Doe', 'john@example.com', '123-456-7890', 'Active'],
+        ['Jane Smith', 'jane@example.com', '098-765-4321', 'Active'],
+        ['Bob Johnson', 'bob@example.com', '555-123-4567', 'Inactive'],
       ],
-    };
+    }
 
     res.json({
       success: true,
       data: mockData,
-    });
+    })
   } catch (error) {
-    console.error("Error getting spreadsheet:", error);
+    console.error('Error getting spreadsheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi lấy dữ liệu spreadsheet",
-    });
+      error: 'Lỗi khi lấy dữ liệu spreadsheet',
+    })
   }
-});
+})
 
 // Update spreadsheet data
-app.put("/api/sheets/:spreadsheetId", async (req, res) => {
+app.put('/api/sheets/:spreadsheetId', async (req, res) => {
   try {
-    const { spreadsheetId } = req.params;
-    const { range, values } = req.body;
+    const { spreadsheetId } = req.params
+    const { range, values } = req.body
 
     res.json({
       success: true,
-      message: "Spreadsheet updated successfully",
+      message: 'Spreadsheet updated successfully',
       updatedCells: values.length,
-    });
+    })
   } catch (error) {
-    console.error("Error updating spreadsheet:", error);
+    console.error('Error updating spreadsheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi cập nhật spreadsheet",
-    });
+      error: 'Lỗi khi cập nhật spreadsheet',
+    })
   }
-});
+})
 
 // Append data to spreadsheet (alternative endpoint)
-app.post("/api/sheets/:spreadsheetId/append", async (req, res) => {
+app.post('/api/sheets/:spreadsheetId/append', async (req, res) => {
   try {
-    const { spreadsheetId } = req.params;
-    const { range, values } = req.body;
+    const { spreadsheetId } = req.params
+    const { range, values } = req.body
 
     res.json({
       success: true,
-      message: "Data appended successfully",
+      message: 'Data appended successfully',
       updates: {
         spreadsheetId,
         updatedRange: range,
         updatedRows: values.length,
       },
-    });
+    })
   } catch (error) {
-    console.error("Error appending to spreadsheet:", error);
+    console.error('Error appending to spreadsheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi thêm dữ liệu vào spreadsheet",
-    });
+      error: 'Lỗi khi thêm dữ liệu vào spreadsheet',
+    })
   }
-});
+})
 
 // Create new spreadsheet
-app.post("/api/sheets/create", async (req, res) => {
+app.post('/api/sheets/create', async (req, res) => {
   try {
-    const { title, sheets } = req.body;
+    const { title, sheets } = req.body
 
     const mockSpreadsheet = {
       spreadsheetId: `sheet_${Date.now()}`,
       properties: {
-        title: title || "New Spreadsheet",
+        title: title || 'New Spreadsheet',
       },
-      spreadsheetUrl: "https://docs.google.com/spreadsheets/d/new_sheet/edit",
-    };
+      spreadsheetUrl: 'https://docs.google.com/spreadsheets/d/new_sheet/edit',
+    }
 
     res.json({
       success: true,
       data: mockSpreadsheet,
-      message: "Spreadsheet created successfully",
-    });
+      message: 'Spreadsheet created successfully',
+    })
   } catch (error) {
-    console.error("Error creating spreadsheet:", error);
+    console.error('Error creating spreadsheet:', error)
     res.status(500).json({
       success: false,
-      error: "Lỗi khi tạo spreadsheet",
-    });
+      error: 'Lỗi khi tạo spreadsheet',
+    })
   }
-});
+})
 
 // ============================================
 // Serve React app for all non-API routes
 // IMPORTANT: This must be LAST, after all API routes
 // ============================================
-app.get("*", (req, res) => {
+app.get('*', (req, res) => {
   // Only serve React app for non-API routes
-  if (!req.path.startsWith("/api")) {
-    res.sendFile(path.join(__dirname, "../build/index.html"));
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
   } else {
     // Return 404 for undefined API routes
     res.status(404).json({
       success: false,
-      error: "API endpoint not found",
+      error: 'API endpoint not found',
       path: req.path,
-    });
+    })
   }
-});
+})
 
 server.listen(PORT, () => {
-  console.log(`🚀 Backend server running on port ${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/health`);
-  console.log(`🌐 WebSocket server ready for connections`);
-});
+  console.log(`🚀 Backend server running on port ${PORT}`)
+  console.log(`📊 Health check: http://localhost:${PORT}/health`)
+  console.log(`🌐 WebSocket server ready for connections`)
+})
 
 // Graceful shutdown
-process.on("SIGTERM", () => {
-  console.log("SIGTERM received, shutting down gracefully");
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully')
   server.close(() => {
-    console.log("Process terminated");
-  });
-});
+    console.log('Process terminated')
+  })
+})

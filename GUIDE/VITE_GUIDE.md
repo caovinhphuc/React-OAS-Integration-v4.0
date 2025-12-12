@@ -188,7 +188,10 @@ VITE_CDN_URL=https://cdn.yourdomain.com
 
 ```bash
 # Cài đặt PWA plugin (đã có trong dependencies)
-npm install --save-dev vite-plugin-pwa
+npm install vite-plugin-pwa --save-dev
+```
+
+```javascript
 
 # Cấu hình trong vite.config.js
 import { VitePWA } from 'vite-plugin-pwa'

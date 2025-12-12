@@ -4,21 +4,19 @@
  * Manages real-time connections and events
  */
 
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client'
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_URL ||
-  process.env.VITE_API_URL ||
-  "http://localhost:3001";
+  process.env.REACT_APP_API_URL || process.env.VITE_API_URL || 'http://localhost:3001'
 
 class WebSocketService {
   constructor() {
-    this.socket = null;
-    this.connected = false;
-    this.listeners = new Map();
-    this.reconnectAttempts = 0;
-    this.maxReconnectAttempts = 5;
-    this.reconnectDelay = 1000;
+    this.socket = null
+    this.connected = false
+    this.listeners = new Map()
+    this.reconnectAttempts = 0
+    this.maxReconnectAttempts = 5
+    this.reconnectDelay = 1000
   }
 
   /**
@@ -26,63 +24,63 @@ class WebSocketService {
    */
   connect(userId = null) {
     if (this.socket && this.connected) {
-      console.log("⚠️ Already connected to WebSocket");
-      return this.socket;
+      console.log('⚠️ Already connected to WebSocket')
+      return this.socket
     }
 
     try {
       this.socket = io(API_BASE_URL, {
-        transports: ["websocket", "polling"],
+        transports: ['websocket', 'polling'],
         reconnection: true,
         reconnectionAttempts: this.maxReconnectAttempts,
         reconnectionDelay: this.reconnectDelay,
         autoConnect: true,
         withCredentials: true,
-      });
+      })
 
       // Connection events
-      this.socket.on("connect", () => {
-        console.log("✅ Connected to WebSocket server:", this.socket.id);
-        this.connected = true;
-        this.reconnectAttempts = 0;
+      this.socket.on('connect', () => {
+        console.log('✅ Connected to WebSocket server:', this.socket.id)
+        this.connected = true
+        this.reconnectAttempts = 0
 
         if (userId) {
-          this.socket.emit("join-room", { room: `user:${userId}`, userId });
+          this.socket.emit('join-room', { room: `user:${userId}`, userId })
         }
 
-        this.emit("connected", { socketId: this.socket.id });
-      });
+        this.emit('connected', { socketId: this.socket.id })
+      })
 
-      this.socket.on("disconnect", (reason) => {
-        console.log("❌ Disconnected from WebSocket:", reason);
-        this.connected = false;
-        this.emit("disconnected", { reason });
-      });
+      this.socket.on('disconnect', (reason) => {
+        console.log('❌ Disconnected from WebSocket:', reason)
+        this.connected = false
+        this.emit('disconnected', { reason })
+      })
 
-      this.socket.on("connect_error", (error) => {
-        console.error("❌ WebSocket connection error:", error);
-        this.reconnectAttempts++;
-        this.emit("connection-error", {
+      this.socket.on('connect_error', (error) => {
+        console.error('❌ WebSocket connection error:', error)
+        this.reconnectAttempts++
+        this.emit('connection-error', {
           error,
           attempt: this.reconnectAttempts,
-        });
-      });
+        })
+      })
 
-      this.socket.on("reconnect", (attemptNumber) => {
-        console.log(`🔄 Reconnected after ${attemptNumber} attempts`);
-        this.emit("reconnected", { attemptNumber });
-      });
+      this.socket.on('reconnect', (attemptNumber) => {
+        console.log(`🔄 Reconnected after ${attemptNumber} attempts`)
+        this.emit('reconnected', { attemptNumber })
+      })
 
       // Ping/Pong for health check
-      this.socket.on("pong", (data) => {
-        this.emit("pong", data);
-      });
+      this.socket.on('pong', (data) => {
+        this.emit('pong', data)
+      })
 
-      return this.socket;
+      return this.socket
     } catch (error) {
-      console.error("❌ Failed to connect to WebSocket:", error);
-      this.emit("connection-error", { error });
-      return null;
+      console.error('❌ Failed to connect to WebSocket:', error)
+      this.emit('connection-error', { error })
+      return null
     }
   }
 
@@ -91,11 +89,11 @@ class WebSocketService {
    */
   disconnect() {
     if (this.socket) {
-      this.socket.disconnect();
-      this.socket = null;
-      this.connected = false;
-      this.listeners.clear();
-      console.log("🔌 Disconnected from WebSocket");
+      this.socket.disconnect()
+      this.socket = null
+      this.connected = false
+      this.listeners.clear()
+      console.log('🔌 Disconnected from WebSocket')
     }
   }
 
@@ -103,7 +101,7 @@ class WebSocketService {
    * Check if connected
    */
   isConnected() {
-    return this.connected && this.socket && this.socket.connected;
+    return this.connected && this.socket && this.socket.connected
   }
 
   /**
@@ -111,10 +109,10 @@ class WebSocketService {
    */
   joinRoom(room, userId = null) {
     if (!this.isConnected()) {
-      console.error("⚠️ Cannot join room: not connected");
-      return;
+      console.error('⚠️ Cannot join room: not connected')
+      return
     }
-    this.socket.emit("join-room", { room, userId });
+    this.socket.emit('join-room', { room, userId })
   }
 
   /**
@@ -122,10 +120,10 @@ class WebSocketService {
    */
   leaveRoom(room, userId = null) {
     if (!this.isConnected()) {
-      console.error("⚠️ Cannot leave room: not connected");
-      return;
+      console.error('⚠️ Cannot leave room: not connected')
+      return
     }
-    this.socket.emit("leave-room", { room, userId });
+    this.socket.emit('leave-room', { room, userId })
   }
 
   /**
@@ -133,9 +131,9 @@ class WebSocketService {
    */
   subscribeMetrics() {
     if (!this.isConnected()) {
-      this.connect();
+      this.connect()
     }
-    this.socket.emit("subscribe-metrics");
+    this.socket.emit('subscribe-metrics')
   }
 
   /**
@@ -143,7 +141,7 @@ class WebSocketService {
    */
   unsubscribeMetrics() {
     if (this.isConnected()) {
-      this.socket.emit("unsubscribe-metrics");
+      this.socket.emit('unsubscribe-metrics')
     }
   }
 
@@ -152,10 +150,10 @@ class WebSocketService {
    */
   subscribeNotifications(userId) {
     if (!this.isConnected()) {
-      this.connect(userId);
+      this.connect(userId)
     }
-    this.socket.emit("subscribe-notifications", { userId });
-    this.joinRoom(`notifications:${userId}`, userId);
+    this.socket.emit('subscribe-notifications', { userId })
+    this.joinRoom(`notifications:${userId}`, userId)
   }
 
   /**
@@ -163,8 +161,8 @@ class WebSocketService {
    */
   unsubscribeNotifications(userId) {
     if (this.isConnected()) {
-      this.socket.emit("unsubscribe-notifications", { userId });
-      this.leaveRoom(`notifications:${userId}`, userId);
+      this.socket.emit('unsubscribe-notifications', { userId })
+      this.leaveRoom(`notifications:${userId}`, userId)
     }
   }
 
@@ -172,16 +170,16 @@ class WebSocketService {
    * Join Google Sheets collaborative editing room
    */
   joinSheetsRoom(spreadsheetId, userId = null) {
-    const room = `sheets:${spreadsheetId}`;
-    this.joinRoom(room, userId);
+    const room = `sheets:${spreadsheetId}`
+    this.joinRoom(room, userId)
   }
 
   /**
    * Leave Google Sheets room
    */
   leaveSheetsRoom(spreadsheetId, userId = null) {
-    const room = `sheets:${spreadsheetId}`;
-    this.leaveRoom(room, userId);
+    const room = `sheets:${spreadsheetId}`
+    this.leaveRoom(room, userId)
   }
 
   /**
@@ -189,15 +187,15 @@ class WebSocketService {
    */
   sendSheetsEdit(spreadsheetId, range, value, userId = null) {
     if (!this.isConnected()) {
-      console.error("⚠️ Cannot send sheets edit: not connected");
-      return;
+      console.error('⚠️ Cannot send sheets edit: not connected')
+      return
     }
-    this.socket.emit("sheets-edit", {
+    this.socket.emit('sheets-edit', {
       spreadsheetId,
       range,
       value,
       userId,
-    });
+    })
   }
 
   /**
@@ -205,13 +203,13 @@ class WebSocketService {
    */
   sendCursorPosition(spreadsheetId, cell, userId = null) {
     if (!this.isConnected()) {
-      return;
+      return
     }
-    this.socket.emit("sheets-cursor", {
+    this.socket.emit('sheets-cursor', {
       spreadsheetId,
       cell,
       userId,
-    });
+    })
   }
 
   /**
@@ -219,13 +217,13 @@ class WebSocketService {
    */
   on(event, callback) {
     if (!this.listeners.has(event)) {
-      this.listeners.set(event, []);
+      this.listeners.set(event, [])
     }
-    this.listeners.get(event).push(callback);
+    this.listeners.get(event).push(callback)
 
     // Also set up Socket.io listener
     if (this.socket) {
-      this.socket.on(event, callback);
+      this.socket.on(event, callback)
     }
   }
 
@@ -233,16 +231,16 @@ class WebSocketService {
    * Remove event listener
    */
   off(event, callback) {
-    const listeners = this.listeners.get(event);
+    const listeners = this.listeners.get(event)
     if (listeners) {
-      const index = listeners.indexOf(callback);
+      const index = listeners.indexOf(callback)
       if (index > -1) {
-        listeners.splice(index, 1);
+        listeners.splice(index, 1)
       }
     }
 
     if (this.socket) {
-      this.socket.off(event, callback);
+      this.socket.off(event, callback)
     }
   }
 
@@ -250,15 +248,15 @@ class WebSocketService {
    * Emit custom event to listeners
    */
   emit(event, data) {
-    const listeners = this.listeners.get(event);
+    const listeners = this.listeners.get(event)
     if (listeners) {
       listeners.forEach((callback) => {
         try {
-          callback(data);
+          callback(data)
         } catch (error) {
-          console.error(`Error in listener for ${event}:`, error);
+          console.error(`Error in listener for ${event}:`, error)
         }
-      });
+      })
     }
   }
 
@@ -266,10 +264,10 @@ class WebSocketService {
    * Get socket ID
    */
   getSocketId() {
-    return this.socket ? this.socket.id : null;
+    return this.socket ? this.socket.id : null
   }
 }
 
 // Create singleton instance
-export const websocketService = new WebSocketService();
-export default websocketService;
+export const websocketService = new WebSocketService()
+export default websocketService

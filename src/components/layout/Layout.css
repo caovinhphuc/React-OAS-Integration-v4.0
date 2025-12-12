@@ -4,11 +4,7 @@
   flex-direction: column;
   height: 100vh;
   background: #f8fafc; /* ✅ Fix: Use solid color instead of gradient */
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Header Styles */
@@ -260,7 +256,7 @@
 }
 
 .nav-item.active::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -16px;
   top: 50%;
