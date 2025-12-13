@@ -174,3 +174,4 @@
 [0]   Line 533:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
 [0] 
 [0] webpack compiled with 1 warning
+[0] npm run start exited with code SIGINT
