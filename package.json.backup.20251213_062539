@@ -67,7 +67,6 @@
     "http-proxy-middleware": "^3.0.5",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.294.0",
-    "netlify-cli": "^23.12.3",
     "node-cron": "^4.2.1",
     "node-telegram-bot-api": "^0.66.0",
     "nodemailer": "^7.0.11",

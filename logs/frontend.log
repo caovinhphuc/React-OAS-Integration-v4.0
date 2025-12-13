@@ -47,130 +47,19 @@
 [1] 
 [1] Node.js v20.18.0
 [1] npm run backend exited with code 1
-[0] (node:33909) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[0] (node:62814) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 [0] (Use `node --trace-deprecation ...` to show where the warning was created)
-[0] (node:33909) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+[0] (node:62814) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 [0] Starting the development server...
 [0] 
-[0] Compiled with warnings.
+[0] Compiled successfully!
 [0] 
-[0] [eslint] 
-[0] src/components/auth/Login.jsx
-[0]   Line 303:15:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+[0] You can now view react-oas-integration in the browser.
 [0] 
-[0] src/components/automation/AutomationDashboard.jsx
-[0]   Line 8:11:   'isAuthenticated' is assigned a value but never used                                                                                     no-unused-vars
-[0]   Line 8:28:   'serviceAccount' is assigned a value but never used                                                                                      no-unused-vars
-[0]   Line 144:6:  React Hook useEffect has missing dependencies: 'sampleAutomations' and 'sampleLogs'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+[0]   Local:            http://localhost:3000
+[0]   On Your Network:  http://192.168.10.164:3000
 [0] 
-[0] src/components/google/GoogleAppsScriptIntegration.jsx
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used                                                              no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used                                                               no-unused-vars
-[0]   Line 88:6:   React Hook useEffect has a missing dependency: 'sampleScripts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0]   Line 214:9:  'formatDate' is assigned a value but never used                                                                   no-unused-vars
+[0] Note that the development build is not optimized.
+[0] To create a production build, use npm run build.
 [0] 
-[0] src/components/google/GoogleSheetsIntegration.jsx
-[0]   Line 2:23:   'useDispatch' is defined but never used                        no-unused-vars
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used           no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used            no-unused-vars
-[0]   Line 213:9:  'handleDeleteColumn' is assigned a value but never used        no-unused-vars
-[0]   Line 223:9:  'handleAddRow' is assigned a value but never used              no-unused-vars
-[0]   Line 230:9:  'handleDeleteRow' is assigned a value but never used           no-unused-vars
-[0]   Line 235:9:  'handleDeleteEmptyRows' is assigned a value but never used     no-unused-vars
-[0]   Line 242:9:  'handleRowSelect' is assigned a value but never used           no-unused-vars
-[0]   Line 248:9:  'handleSelectAllRows' is assigned a value but never used       no-unused-vars
-[0]   Line 253:9:  'handleDeleteSelectedRows' is assigned a value but never used  no-unused-vars
-[0]   Line 263:9:  'handleMoveRow' is assigned a value but never used             no-unused-vars
-[0] 
-[0] src/components/layout/Layout.jsx
-[0]   Line 73:6:  React Hook useEffect has a missing dependency: 'message'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/AuditLogsViewer.jsx
-[0]   Line 25:3:  'CalendarOutlined' is defined but never used                                                                                        no-unused-vars
-[0]   Line 27:8:  'dayjs' is defined but never used                                                                                                   no-unused-vars
-[0]   Line 98:6:  React Hook useEffect has missing dependencies: 'loadLogs' and 'loadStatistics'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/SSOLogin.jsx
-[0]   Line 16:21:  'setProviders' is assigned a value but never used  no-unused-vars
-[0] 
-[0] src/components/security/SecuritySettings.jsx
-[0]   Line 6:3:   'Input' is defined but never used                                                                                   no-unused-vars
-[0]   Line 35:6:  React Hook useEffect has a missing dependency: 'loadUserProfile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/UserManagement.jsx
-[0]   Line 21:3:  'PlusOutlined' is defined but never used    no-unused-vars
-[0]   Line 22:3:  'SafetyOutlined' is defined but never used  no-unused-vars
-[0] 
-[0] src/components/telegram/TelegramIntegration.jsx
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used                                                                                                     no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used                                                                                                      no-unused-vars
-[0]   Line 89:6:   React Hook useEffect has missing dependencies: 'sampleBotInfo', 'sampleChats', and 'sampleMessages'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/services/retailService.js
-[0]   Line 151:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-[0] 
-[0] src/services/securityService.js
-[0]   Line 533:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-[0] 
-[0] Search for the keywords to learn more about each warning.
-[0] To ignore, add // eslint-disable-next-line to the line before.
-[0] 
-[0] WARNING in [eslint] 
-[0] src/components/auth/Login.jsx
-[0]   Line 303:15:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
-[0] 
-[0] src/components/automation/AutomationDashboard.jsx
-[0]   Line 8:11:   'isAuthenticated' is assigned a value but never used                                                                                     no-unused-vars
-[0]   Line 8:28:   'serviceAccount' is assigned a value but never used                                                                                      no-unused-vars
-[0]   Line 144:6:  React Hook useEffect has missing dependencies: 'sampleAutomations' and 'sampleLogs'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/google/GoogleAppsScriptIntegration.jsx
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used                                                              no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used                                                               no-unused-vars
-[0]   Line 88:6:   React Hook useEffect has a missing dependency: 'sampleScripts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0]   Line 214:9:  'formatDate' is assigned a value but never used                                                                   no-unused-vars
-[0] 
-[0] src/components/google/GoogleSheetsIntegration.jsx
-[0]   Line 2:23:   'useDispatch' is defined but never used                        no-unused-vars
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used           no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used            no-unused-vars
-[0]   Line 213:9:  'handleDeleteColumn' is assigned a value but never used        no-unused-vars
-[0]   Line 223:9:  'handleAddRow' is assigned a value but never used              no-unused-vars
-[0]   Line 230:9:  'handleDeleteRow' is assigned a value but never used           no-unused-vars
-[0]   Line 235:9:  'handleDeleteEmptyRows' is assigned a value but never used     no-unused-vars
-[0]   Line 242:9:  'handleRowSelect' is assigned a value but never used           no-unused-vars
-[0]   Line 248:9:  'handleSelectAllRows' is assigned a value but never used       no-unused-vars
-[0]   Line 253:9:  'handleDeleteSelectedRows' is assigned a value but never used  no-unused-vars
-[0]   Line 263:9:  'handleMoveRow' is assigned a value but never used             no-unused-vars
-[0] 
-[0] src/components/layout/Layout.jsx
-[0]   Line 73:6:  React Hook useEffect has a missing dependency: 'message'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/AuditLogsViewer.jsx
-[0]   Line 25:3:  'CalendarOutlined' is defined but never used                                                                                        no-unused-vars
-[0]   Line 27:8:  'dayjs' is defined but never used                                                                                                   no-unused-vars
-[0]   Line 98:6:  React Hook useEffect has missing dependencies: 'loadLogs' and 'loadStatistics'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/SSOLogin.jsx
-[0]   Line 16:21:  'setProviders' is assigned a value but never used  no-unused-vars
-[0] 
-[0] src/components/security/SecuritySettings.jsx
-[0]   Line 6:3:   'Input' is defined but never used                                                                                   no-unused-vars
-[0]   Line 35:6:  React Hook useEffect has a missing dependency: 'loadUserProfile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/components/security/UserManagement.jsx
-[0]   Line 21:3:  'PlusOutlined' is defined but never used    no-unused-vars
-[0]   Line 22:3:  'SafetyOutlined' is defined but never used  no-unused-vars
-[0] 
-[0] src/components/telegram/TelegramIntegration.jsx
-[0]   Line 10:11:  'isAuthenticated' is assigned a value but never used                                                                                                     no-unused-vars
-[0]   Line 10:28:  'serviceAccount' is assigned a value but never used                                                                                                      no-unused-vars
-[0]   Line 89:6:   React Hook useEffect has missing dependencies: 'sampleBotInfo', 'sampleChats', and 'sampleMessages'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
-[0] 
-[0] src/services/retailService.js
-[0]   Line 151:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-[0] 
-[0] src/services/securityService.js
-[0]   Line 533:1:  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-[0] 
-[0] webpack compiled with 1 warning
+[0] webpack compiled successfully
